@@ -8,68 +8,83 @@ public class TimeManager : SingletonManager<TimeManager>
     // UI
     [SerializeField] private TMP_Text timerText;
 
-    // Таймер и время, которое нужно отсчитать
+    //Vars
     [SerializeField] private float timerDuration = 10f;
     private float currentTime;
 
-    // События
+    // Events
     public Action OnTimerStart;
     public Action OnTimerStop;
+    public Action OnHalfTime;
 
-    // Статус таймера
+    //Timer Status
     [SerializeField] private bool isTimerRunning = false;
 
     void Start()
     {
-
         OnTimerStop += TestLog;
-        // Инициализация
+        //OnHalfTime+=
         currentTime = timerDuration;
-        timerText.SetText(currentTime.ToString("F2"));  // Начальное значение с округлением до 2 знаков после запятой
     }
 
     void Update()
     {
-        // Если таймер работает
-        if (isTimerRunning)
+        if (!isTimerRunning) { 
+            return; 
+        }
+        else
         {
-            currentTime -= Time.deltaTime;  // Уменьшаем оставшееся время на прошедшее с последнего кадра
+            // Update Text
+            int minutes = Mathf.FloorToInt(currentTime / 60f);
+            int seconds = Mathf.FloorToInt(currentTime % 60f);
+            timerText.SetText($"{minutes:00}:{seconds:00}");
+            currentTime -= Time.deltaTime;  // Time less
 
-            // Оновляем текст таймера
-            timerText.SetText(currentTime.ToString("F2"));
+            if (currentTime <= timerDuration * 0.25f)
+            {
+                timerText.color = Color.red;
+            }
+            else if (currentTime <= timerDuration * 0.5f)
+            {
+                OnHalfTime?.Invoke();
+                timerText.color = Color.yellow;
+            }
 
-            // Когда время заканчивается
+
             if (currentTime <= 0)
             {
-                StopTimer();  // Остановить таймер
+                StopTimer();
             }
         }
     }
 
-    // Метод для старта таймера
     public void StartTimer()
     {
         if (!isTimerRunning)
         {
-            currentTime = timerDuration;  // Сброс таймера на исходное значение
+            currentTime = timerDuration;  //reset
             isTimerRunning = true;
             OnTimerStart?.Invoke();
         }
     }
 
-    // Метод для остановки таймера
     public void StopTimer()
     {
         if (isTimerRunning)
         {
             isTimerRunning = false;
-            currentTime = 0f;  // Обнуляем время
+            
             OnTimerStop?.Invoke();
-            timerText.SetText(currentTime.ToString("F2"));
+            
         }
     }
 
-    // Пример метода для проверки остановки таймера (событие)
+    public void ModifyTimer(float amount)
+    {
+        currentTime += amount;
+        //currentTime = Mathf.Clamp(currentTime, 0, timerDuration);
+    }
+
     public void TestLog()
     {
         Debug.Log("Таймер остановлен.");
