@@ -26,9 +26,8 @@ public class PlayerInteraction : MonoBehaviour
 
             if (Physics.Raycast(ray, out hit, interactionDistance, interactionLayers))
             {
-                // TODO: взять предмет
-                // ну и как-то надо чтобы игрок мог прочесть описание предмета
             }
         }
+        
     }
 }
