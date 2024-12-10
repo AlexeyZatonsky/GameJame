@@ -26,7 +26,7 @@ public class PlayerInteraction : MonoBehaviour
 
             if (Physics.Raycast(ray, out hit, interactionDistance, interactionLayers))
             {
-
+                
             }
         }
     }
