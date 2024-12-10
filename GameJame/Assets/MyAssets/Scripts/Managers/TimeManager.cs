@@ -14,6 +14,9 @@ public class TimeManager : SingletonManager<TimeManager>
 
     [SerializeField] private bool halfcomplete = false;
     [SerializeField] private bool colorRed = false;
+    [SerializeField] private bool haveChance = true;
+
+    public bool HaveChance => haveChance;
 
     // Events
     public Action OnTimerStart;
@@ -55,7 +58,7 @@ public class TimeManager : SingletonManager<TimeManager>
             }
 
 
-            if (currentTime <= 0)
+            if (currentTime <= 0 )
             {
                 StopTimer();
             }
@@ -66,9 +69,10 @@ public class TimeManager : SingletonManager<TimeManager>
     {
         if (!isTimerRunning)
         {
-            currentTime = timerDuration;  //reset
+            //currentTime = timerDuration;  //reset
             isTimerRunning = true;
             OnTimerStart?.Invoke();
+            haveChance = false;
         }
     }
 
@@ -83,9 +87,12 @@ public class TimeManager : SingletonManager<TimeManager>
         }
     }
 
-    public void ModifyTimer(float amount)
+    public void AddTime(float amount)
     {
         currentTime += amount;
+        if (!haveChance) { return; }
+        //currentTime += amount;
+        StartTimer();
         //currentTime = Mathf.Clamp(currentTime, 0, timerDuration);
     }
 

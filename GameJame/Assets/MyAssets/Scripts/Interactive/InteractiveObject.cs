@@ -4,23 +4,15 @@ using UnityEngine;
 
 public class InteractiveObject : MonoBehaviour, IInteractive
 {
-    [SerializeField] private IntractiveObjectData intractiveObjectData;
-    [SerializeField] private List<LootData> lootDatasList = new List<LootData>();
+    [SerializeField] protected IntractiveObjectData intractiveObjectData;
+    //[SerializeField] private List<LootData> lootDatasList = new List<LootData>();
 
-    private bool canInteract = false;
+    [SerializeField] protected bool canInteract = false;
 
-    public void Interact()
+    public virtual void Interact()
     {
+        if (!canInteract) { return; }
 
-        foreach (LootData toInteract in lootDatasList)
-        {
-            //TODO: проверяем совпадает ли лут в руках с одним из лутов для взаимодействия с объектом
-        }
-        
-        //TODO: запускаем анимацию
-        
-        
-        
 
         Debug.Log("Interact");
 
