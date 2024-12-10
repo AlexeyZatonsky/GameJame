@@ -13,7 +13,7 @@ public class PlayerInteraction : MonoBehaviour
         var playerCamera = GetComponentInChildren<PlayerCamera>();
         if (playerCamera != null)
         {
-            this.playerCamera = playerCamera.GetComponent<Camera>();
+            this.playerCamera = playerCamera.GetComponentInChildren<Camera>();
         }
     }
 
