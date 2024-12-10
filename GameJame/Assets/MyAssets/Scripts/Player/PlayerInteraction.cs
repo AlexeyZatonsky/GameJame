@@ -13,11 +13,10 @@ public class PlayerInteraction : MonoBehaviour
         var playerCameraComponent = GetComponentInChildren<PlayerCamera>();
         if (playerCameraComponent != null)
         {
-<<<<<<< Updated upstream
-            this.playerCamera = playerCamera.GetComponentInChildren<Camera>();
-=======
+
+
             playerCamera = playerCameraComponent.GetComponentInChildren<Camera>();
->>>>>>> Stashed changes
+
         }
     }
 
@@ -33,15 +32,13 @@ public class PlayerInteraction : MonoBehaviour
 
             if (Physics.Raycast(ray, out hit, interactionDistance, interactionLayers))
             {
-<<<<<<< Updated upstream
-=======
+
                 IInteractive interactive = hit.collider.GetComponent<IInteractive>();
                 if (interactive != null)
                 {
                     interactive.Interact();
-                    Debug.DrawRay(ray.origin, ray.direction * hit.distance, Color.red,20f);
+                    Debug.DrawRay(ray.origin, ray.direction * hit.distance, Color.red, 20f);
                 }
->>>>>>> Stashed changes
             }
         }
         

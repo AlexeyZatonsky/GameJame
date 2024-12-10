@@ -11,7 +11,7 @@ public class InteractiveObject : MonoBehaviour, IInteractive
 
     public void Interact()
     {
-<<<<<<< Updated upstream
+
         foreach (LootData toInteract in lootDatasList)
         {
             //TODO: проверяем совпадает ли лут в руках с одним из лутов для взаимодействия с объектом
@@ -21,8 +21,8 @@ public class InteractiveObject : MonoBehaviour, IInteractive
         
         
         
-=======
+
         Debug.Log("Interact");
->>>>>>> Stashed changes
+
     }
 }
