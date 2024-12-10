@@ -1,47 +1,77 @@
 using System;
+using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class TimeManager : SingletonManager<TimeManager>
-{   
-    //UI
-    [SerializeField] private TextMesh timerText;
+{
+    // UI
+    [SerializeField] private TMP_Text timerText;
 
-    //
-    [SerializeField] private float timerAmount = 10;
+    // Таймер и время, которое нужно отсчитать
+    [SerializeField] private float timerDuration = 10f;
+    private float currentTime;
 
-    //Player
-
-    //EVents
+    // События
     public Action OnTimerStart;
     public Action OnTimerStop;
 
+    // Статус таймера
+    [SerializeField] private bool isTimerRunning = false;
 
-
-
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        OnTimerStart?.Invoke();
+
         OnTimerStop += TestLog;
+        // Инициализация
+        currentTime = timerDuration;
+        timerText.SetText(currentTime.ToString("F2"));  // Начальное значение с округлением до 2 знаков после запятой
     }
 
-    // Update is called once per frame
     void Update()
     {
-        if (Time.time <= timerAmount)
+        // Если таймер работает
+        if (isTimerRunning)
         {
-            Debug.Log(Time.time);
-            return;
+            currentTime -= Time.deltaTime;  // Уменьшаем оставшееся время на прошедшее с последнего кадра
+
+            // Оновляем текст таймера
+            timerText.SetText(currentTime.ToString("F2"));
+
+            // Когда время заканчивается
+            if (currentTime <= 0)
+            {
+                StopTimer();  // Остановить таймер
+            }
         }
-        else { 
-            OnTimerStop?.Invoke();
-        }  
-        
-        
     }
 
+    // Метод для старта таймера
+    public void StartTimer()
+    {
+        if (!isTimerRunning)
+        {
+            currentTime = timerDuration;  // Сброс таймера на исходное значение
+            isTimerRunning = true;
+            OnTimerStart?.Invoke();
+        }
+    }
+
+    // Метод для остановки таймера
+    public void StopTimer()
+    {
+        if (isTimerRunning)
+        {
+            isTimerRunning = false;
+            currentTime = 0f;  // Обнуляем время
+            OnTimerStop?.Invoke();
+            timerText.SetText(currentTime.ToString("F2"));
+        }
+    }
+
+    // Пример метода для проверки остановки таймера (событие)
     public void TestLog()
     {
-        Debug.Log("TimerStopped");
+        Debug.Log("Таймер остановлен.");
     }
 }

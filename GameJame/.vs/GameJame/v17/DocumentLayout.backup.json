@@ -3,12 +3,16 @@
   "WorkspaceRootPath": "E:\\Obsidian\\vaults\\GameJame\\GameJame\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{FC18D914-96C2-CAC7-D50A-B15B26CC7C0B}|Assembly-CSharp.csproj|e:\\obsidian\\vaults\\gamejame\\gamejame\\assets\\timemanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{FC18D914-96C2-CAC7-D50A-B15B26CC7C0B}|Assembly-CSharp.csproj|solutionrelative:assets\\timemanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{FC18D914-96C2-CAC7-D50A-B15B26CC7C0B}|Assembly-CSharp.csproj|e:\\obsidian\\vaults\\gamejame\\gamejame\\assets\\myassets\\scripts\\managers\\timemanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{FC18D914-96C2-CAC7-D50A-B15B26CC7C0B}|Assembly-CSharp.csproj|solutionrelative:assets\\myassets\\scripts\\managers\\timemanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{FC18D914-96C2-CAC7-D50A-B15B26CC7C0B}|Assembly-CSharp.csproj|e:\\obsidian\\vaults\\gamejame\\gamejame\\assets\\singletonmanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{FC18D914-96C2-CAC7-D50A-B15B26CC7C0B}|Assembly-CSharp.csproj|solutionrelative:assets\\singletonmanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|E:\\Obsidian\\vaults\\GameJame\\GameJame\\Assets\\TimeManager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Assets\\TimeManager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|E:\\Obsidian\\vaults\\GameJame\\GameJame\\Assets\\SingletonManager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Assets\\SingletonManager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -18,11 +22,24 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 1,
+          "SelectedChildIndex": 0,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 0,
+              "Title": "TimeManager.cs",
+              "DocumentMoniker": "E:\\Obsidian\\vaults\\GameJame\\GameJame\\Assets\\MyAssets\\Scripts\\Managers\\TimeManager.cs",
+              "RelativeDocumentMoniker": "Assets\\MyAssets\\Scripts\\Managers\\TimeManager.cs",
+              "ToolTip": "E:\\Obsidian\\vaults\\GameJame\\GameJame\\Assets\\MyAssets\\Scripts\\Managers\\TimeManager.cs*",
+              "RelativeToolTip": "Assets\\MyAssets\\Scripts\\Managers\\TimeManager.cs*",
+              "ViewState": "AgIAABIAAAAAAAAAAAAQwC0AAAAqAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-12-09T19:00:00.868Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
               "Title": "SingletonManager.cs",
               "DocumentMoniker": "E:\\Obsidian\\vaults\\GameJame\\GameJame\\Assets\\SingletonManager.cs",
               "RelativeDocumentMoniker": "Assets\\SingletonManager.cs",
@@ -30,21 +47,18 @@
               "RelativeToolTip": "Assets\\SingletonManager.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAUAAAAkAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-12-09T18:45:35.988Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-12-09T18:45:35.988Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 1,
               "Title": "TimeManager.cs",
               "DocumentMoniker": "E:\\Obsidian\\vaults\\GameJame\\GameJame\\Assets\\TimeManager.cs",
               "RelativeDocumentMoniker": "Assets\\TimeManager.cs",
               "ToolTip": "E:\\Obsidian\\vaults\\GameJame\\GameJame\\Assets\\TimeManager.cs",
               "RelativeToolTip": "Assets\\TimeManager.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAAMAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-12-09T18:41:42.924Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-12-09T18:41:42.924Z"
             }
           ]
         }
