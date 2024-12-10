@@ -12,18 +12,20 @@ public class TimeManager : SingletonManager<TimeManager>
     [SerializeField] private float timerDuration = 10f;
     private float currentTime;
 
+    [SerializeField] private bool halfcomplete = false;
+    [SerializeField] private bool colorRed = false;
+
     // Events
     public Action OnTimerStart;
     public Action OnTimerStop;
     public Action OnHalfTime;
+
 
     //Timer Status
     [SerializeField] private bool isTimerRunning = false;
 
     void Start()
     {
-        OnTimerStop += TestLog;
-        //OnHalfTime+=
         currentTime = timerDuration;
     }
 
@@ -40,12 +42,14 @@ public class TimeManager : SingletonManager<TimeManager>
             timerText.SetText($"{minutes:00}:{seconds:00}");
             currentTime -= Time.deltaTime;  // Time less
 
-            if (currentTime <= timerDuration * 0.25f)
+            if (!colorRed && currentTime <= timerDuration * 0.25f)
             {
+                colorRed = true;
                 timerText.color = Color.red;
             }
-            else if (currentTime <= timerDuration * 0.5f)
+            else if (!halfcomplete && currentTime <= timerDuration * 0.5f)
             {
+                halfcomplete = true;
                 OnHalfTime?.Invoke();
                 timerText.color = Color.yellow;
             }
@@ -85,8 +89,5 @@ public class TimeManager : SingletonManager<TimeManager>
         //currentTime = Mathf.Clamp(currentTime, 0, timerDuration);
     }
 
-    public void TestLog()
-    {
-        Debug.Log("Таймер остановлен.");
-    }
+
 }

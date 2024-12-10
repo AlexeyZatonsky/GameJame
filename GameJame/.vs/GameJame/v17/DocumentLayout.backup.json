@@ -3,12 +3,24 @@
   "WorkspaceRootPath": "E:\\Obsidian\\vaults\\GameJame\\GameJame\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{FC18D914-96C2-CAC7-D50A-B15B26CC7C0B}|Assembly-CSharp.csproj|e:\\obsidian\\vaults\\gamejame\\gamejame\\assets\\myassets\\scripts\\managers\\timemanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{FC18D914-96C2-CAC7-D50A-B15B26CC7C0B}|Assembly-CSharp.csproj|solutionrelative:assets\\myassets\\scripts\\managers\\timemanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{FC18D914-96C2-CAC7-D50A-B15B26CC7C0B}|Assembly-CSharp.csproj|e:\\obsidian\\vaults\\gamejame\\gamejame\\assets\\myassets\\scripts\\interactive\\interactiveobject.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{FC18D914-96C2-CAC7-D50A-B15B26CC7C0B}|Assembly-CSharp.csproj|solutionrelative:assets\\myassets\\scripts\\interactive\\interactiveobject.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{FC18D914-96C2-CAC7-D50A-B15B26CC7C0B}|Assembly-CSharp.csproj|e:\\obsidian\\vaults\\gamejame\\gamejame\\assets\\myassets\\scripts\\scriptableobjects\\intractiveobjectdata.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{FC18D914-96C2-CAC7-D50A-B15B26CC7C0B}|Assembly-CSharp.csproj|e:\\obsidian\\vaults\\gamejame\\gamejame\\assets\\myassets\\scripts\\player\\playerinteraction.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{FC18D914-96C2-CAC7-D50A-B15B26CC7C0B}|Assembly-CSharp.csproj|solutionrelative:assets\\myassets\\scripts\\player\\playerinteraction.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{FC18D914-96C2-CAC7-D50A-B15B26CC7C0B}|Assembly-CSharp.csproj|e:\\obsidian\\vaults\\gamejame\\gamejame\\assets\\myassets\\scripts\\input\\inputmanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{FC18D914-96C2-CAC7-D50A-B15B26CC7C0B}|Assembly-CSharp.csproj|solutionrelative:assets\\myassets\\scripts\\input\\inputmanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{FC18D914-96C2-CAC7-D50A-B15B26CC7C0B}|Assembly-CSharp.csproj|E:\\Obsidian\\vaults\\GameJame\\GameJame\\assets\\myassets\\scripts\\scriptableobjects\\intractiveobjectdata.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{FC18D914-96C2-CAC7-D50A-B15B26CC7C0B}|Assembly-CSharp.csproj|solutionrelative:assets\\myassets\\scripts\\scriptableobjects\\intractiveobjectdata.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{FC18D914-96C2-CAC7-D50A-B15B26CC7C0B}|Assembly-CSharp.csproj|e:\\obsidian\\vaults\\gamejame\\gamejame\\assets\\myassets\\scripts\\managers\\timemanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{FC18D914-96C2-CAC7-D50A-B15B26CC7C0B}|Assembly-CSharp.csproj|solutionrelative:assets\\myassets\\scripts\\managers\\timemanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -18,24 +30,63 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 0,
+          "SelectedChildIndex": 2,
           "Children": [
             {
               "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "PlayerInteraction.cs",
+              "DocumentMoniker": "E:\\Obsidian\\vaults\\GameJame\\GameJame\\Assets\\MyAssets\\Scripts\\Player\\PlayerInteraction.cs",
+              "RelativeDocumentMoniker": "Assets\\MyAssets\\Scripts\\Player\\PlayerInteraction.cs",
+              "ToolTip": "E:\\Obsidian\\vaults\\GameJame\\GameJame\\Assets\\MyAssets\\Scripts\\Player\\PlayerInteraction.cs",
+              "RelativeToolTip": "Assets\\MyAssets\\Scripts\\Player\\PlayerInteraction.cs",
+              "ViewState": "AgIAAAUAAAAAAAAAAAAQwB8AAAAfAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-12-10T17:01:00.827Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "InputManager.cs",
+              "DocumentMoniker": "E:\\Obsidian\\vaults\\GameJame\\GameJame\\Assets\\MyAssets\\Scripts\\Input\\InputManager.cs",
+              "RelativeDocumentMoniker": "Assets\\MyAssets\\Scripts\\Input\\InputManager.cs",
+              "ToolTip": "E:\\Obsidian\\vaults\\GameJame\\GameJame\\Assets\\MyAssets\\Scripts\\Input\\InputManager.cs",
+              "RelativeToolTip": "Assets\\MyAssets\\Scripts\\Input\\InputManager.cs",
+              "ViewState": "AgIAAAMAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-12-10T17:00:29.329Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
               "DocumentIndex": 0,
+              "Title": "InteractiveObject.cs",
+              "DocumentMoniker": "E:\\Obsidian\\vaults\\GameJame\\GameJame\\Assets\\MyAssets\\Scripts\\Interactive\\InteractiveObject.cs",
+              "RelativeDocumentMoniker": "Assets\\MyAssets\\Scripts\\Interactive\\InteractiveObject.cs",
+              "ToolTip": "E:\\Obsidian\\vaults\\GameJame\\GameJame\\Assets\\MyAssets\\Scripts\\Interactive\\InteractiveObject.cs",
+              "RelativeToolTip": "Assets\\MyAssets\\Scripts\\Interactive\\InteractiveObject.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAIAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-12-10T17:00:20.932Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
               "Title": "TimeManager.cs",
               "DocumentMoniker": "E:\\Obsidian\\vaults\\GameJame\\GameJame\\Assets\\MyAssets\\Scripts\\Managers\\TimeManager.cs",
               "RelativeDocumentMoniker": "Assets\\MyAssets\\Scripts\\Managers\\TimeManager.cs",
               "ToolTip": "E:\\Obsidian\\vaults\\GameJame\\GameJame\\Assets\\MyAssets\\Scripts\\Managers\\TimeManager.cs",
               "RelativeToolTip": "Assets\\MyAssets\\Scripts\\Managers\\TimeManager.cs",
-              "ViewState": "AgIAACQAAAAAAAAAAAAowDkAAAAJAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABUAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-12-10T15:58:02.198Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 3,
               "Title": "IntractiveObjectData.cs",
               "DocumentMoniker": "E:\\Obsidian\\vaults\\GameJame\\GameJame\\Assets\\MyAssets\\Scripts\\ScriptableObjects\\IntractiveObjectData.cs",
               "RelativeDocumentMoniker": "Assets\\MyAssets\\Scripts\\ScriptableObjects\\IntractiveObjectData.cs",

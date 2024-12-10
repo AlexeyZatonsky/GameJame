@@ -1,7 +1,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class InteractiveObject : MonoBehaviour
+
+public class InteractiveObject : MonoBehaviour, IInteractive
 {
     [SerializeField] private IntractiveObjectData intractiveObjectData;
     [SerializeField] private List<LootData> lootDatasList = new List<LootData>();
@@ -10,6 +11,7 @@ public class InteractiveObject : MonoBehaviour
 
     public void Interact()
     {
+<<<<<<< Updated upstream
         foreach (LootData toInteract in lootDatasList)
         {
             //TODO: проверяем совпадает ли лут в руках с одним из лутов для взаимодействия с объектом
@@ -19,5 +21,8 @@ public class InteractiveObject : MonoBehaviour
         
         
         
+=======
+        Debug.Log("Interact");
+>>>>>>> Stashed changes
     }
 }
