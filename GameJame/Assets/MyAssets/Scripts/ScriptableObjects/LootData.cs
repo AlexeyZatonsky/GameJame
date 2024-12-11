@@ -16,7 +16,6 @@ public class LootData : ScriptableObject
     [SerializeField] private GameObject lootPrefab; 
     [SerializeField] private AudioClip lootSoundTake; 
     [SerializeField] private Animator lootAnimator; 
-    [SerializeField] private IntractiveObjectData objectToInteract; 
     
     
     public String GetLootName => lootName;
@@ -28,8 +27,4 @@ public class LootData : ScriptableObject
     public GameObject GetLootPrefab => lootPrefab;
     public AudioClip GetLootSoundTake => lootSoundTake;
     public Animator GetLootAnimator => lootAnimator;
-    public IntractiveObjectData GetLObjectToInteract => objectToInteract;
-
-
-    
 }

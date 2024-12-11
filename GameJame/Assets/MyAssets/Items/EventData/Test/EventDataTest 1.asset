@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 383804d743010ba44816113db545bc9a, type: 3}
-  m_Name: EventDataTest
+  m_Name: EventDataTest 1
   m_EditorClassIdentifier: 
   eventName: 
   eventPositionInHolder: {x: 0, y: 0, z: 0}
@@ -19,6 +19,6 @@ MonoBehaviour:
   interactObjectSound: {fileID: 0}
   cantInteractSound: {fileID: 0}
   interactObjectAnimator: {fileID: 0}
-  eventsToFixFirst: []
+  datasEventsToFixFirst: []
   eventObjState: 0
-  lootToFix: {fileID: 0}
+  dataLootToFix: {fileID: 0}

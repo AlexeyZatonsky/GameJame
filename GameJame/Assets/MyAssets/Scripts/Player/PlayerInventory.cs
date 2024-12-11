@@ -85,6 +85,8 @@ public class PlayerInventory : MonoBehaviour
         OnItemChanged?.Invoke(null); //вызвать в конце
     }
     
+    
+    
     //TODO: Метод для удаления предмета 
     
 }

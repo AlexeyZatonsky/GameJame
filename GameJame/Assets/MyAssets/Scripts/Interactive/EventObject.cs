@@ -7,8 +7,8 @@ using UnityEngine;
 public class EventObject : InteractiveObject
 {
     [SerializeField] private EventData eventData;
-    [SerializeField] private IntractiveObjectData interactiveObjectData;
-
+    [SerializeField] private PlayerInventory playerInventory;
+    
     [SerializeField] private Renderer objectRenderer;
     
 
@@ -19,6 +19,8 @@ public class EventObject : InteractiveObject
         ChangeView();
         
         eventData.SetEventObjState(EventObjState.NeedToFix);
+        
+        playerInventory = FindObjectOfType<PlayerInventory>();
     }
 
     public override void Interact()
@@ -31,6 +33,12 @@ public class EventObject : InteractiveObject
         else
         {
             // TODO: Проверка лута в руках из PlayerInventory.GetCurrentItem
+
+            if (playerInventory.GetCurrentItem is not null)
+            {
+                Debug.LogError(playerInventory.GetCurrentItem.ToString());
+            }
+            
             EventObjectManager.Instance.FixedCountPlus();
             ChangeState();
 

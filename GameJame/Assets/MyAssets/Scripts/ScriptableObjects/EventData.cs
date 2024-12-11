@@ -28,9 +28,8 @@ public class EventData : ScriptableObject
     [SerializeField] private Animator interactObjectAnimator;
     
     ///<summary>мини евенты которые должны быть выполнены до основного</summary>>
-    [SerializeField] private List<EventObject> eventsToFixFirst;
+    [SerializeField] private List<EventData> datasEventsToFixFirst;
     [SerializeField] private EventObjState eventObjState = EventObjState.NeedToFix;
-    [SerializeField] private GameObject lootToFixGameObject;
     
     [SerializeField] private LootData dataLootToFix;
     
@@ -42,7 +41,7 @@ public class EventData : ScriptableObject
     public AudioClip GetInteractObjectSound => interactObjectSound;
     public AudioClip GetCantInteractSound => cantInteractSound;
     public Animator GetInteractObjectAnimator => interactObjectAnimator;
-    public List<EventObject> GetEventsToFixFirst => eventsToFixFirst;
+    public List<EventData> GetDatasEventsToFixFirst => datasEventsToFixFirst;
     public EventObjState GetEventObjState => eventObjState;
     
     public void SetEventObjState(EventObjState value) => eventObjState = value;

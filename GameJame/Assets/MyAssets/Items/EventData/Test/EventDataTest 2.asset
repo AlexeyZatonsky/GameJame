@@ -9,12 +9,16 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 016f0e1f4848c364fa0689df622eec37, type: 3}
-  m_Name: IntractiveObjectData
+  m_Script: {fileID: 11500000, guid: 383804d743010ba44816113db545bc9a, type: 3}
+  m_Name: EventDataTest 2
   m_EditorClassIdentifier: 
-  interactObjectName: 
-  interactObjectDescription: 
+  eventName: 
+  eventPositionInHolder: {x: 0, y: 0, z: 0}
+  eventRotationInHolder: {x: 0, y: 0, z: 0}
   interactObjectPrefab: {fileID: 0}
   interactObjectSound: {fileID: 0}
   cantInteractSound: {fileID: 0}
   interactObjectAnimator: {fileID: 0}
+  datasEventsToFixFirst: []
+  eventObjState: 0
+  dataLootToFix: {fileID: 0}
