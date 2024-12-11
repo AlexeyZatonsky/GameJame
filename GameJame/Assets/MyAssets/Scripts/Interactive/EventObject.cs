@@ -72,8 +72,8 @@ public class EventObject : InteractiveObject
     public void OnMouseOver()
     {
         
-        Debug.Log("OnMouseOver");
-        Debug.Log(interactiveObjectData.GetInteractObjectName);
+        Debug.Log("OnMouseOver"); 
+        //Debug.Log(interactiveObjectData.GetInteractObjectName);
         //String objectDescription = interactiveObjectData.GetInteractObjectDescription;
         float TestDistance = 3f;
 
@@ -82,6 +82,7 @@ public class EventObject : InteractiveObject
             return;
         }
 
+        // тут можно подсветку ебануть как подсказку
         objectRenderer.material.color = Color.yellow;
 
         //HintUI.Instance.ShowHint(objectDescription);

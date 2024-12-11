@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 
+//Это объекты объекты эвентов которфые нужно выполнить
 public class InteractiveObject : MonoBehaviour, IInteractive
 {
     [SerializeField] protected IntractiveObjectData intractiveObjectData;
