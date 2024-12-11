@@ -30,12 +30,7 @@ public class EventObject : InteractiveObject
         }
         else
         {
-            //foreach (LootData toInteract in lootDatasList)
-            //{
-            //    //TODO: ��������� ��������� �� ��� � ����� � ����� �� ����� ��� �������������� � ��������
-            //}
-
-            // I dont understand chto za voprositel]nue znaki
+            // TODO: Проверка лута в руках из PlayerInventory.GetCurrentItem
             EventObjectManager.Instance.FixedCountPlus();
             ChangeState();
 
@@ -99,4 +94,6 @@ public class EventObject : InteractiveObject
         //     Debug.LogError("HintUI instance is not initialized!");
         // }
     }
+    
+    
 }

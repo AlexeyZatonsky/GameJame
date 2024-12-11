@@ -6,7 +6,7 @@ public class PlayerInventory : MonoBehaviour
     [SerializeField] private GameObject itemHolder;
 
     private Loot currentItem;
-
+    public Loot GetCurrentItem => currentItem; //Для проверки предмета в руке см. EventObject.cs
     public event Action<Loot> OnItemChanged;
 
     private void Start()
@@ -82,7 +82,10 @@ public class PlayerInventory : MonoBehaviour
         }
         
         currentItem = null;
-        OnItemChanged?.Invoke(null);
+        OnItemChanged?.Invoke(null); //вызвать в конце
     }
+    
+    //TODO: Метод для удаления предмета 
+    
 }
 

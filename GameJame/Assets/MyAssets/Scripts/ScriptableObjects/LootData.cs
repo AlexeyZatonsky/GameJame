@@ -29,4 +29,7 @@ public class LootData : ScriptableObject
     public AudioClip GetLootSoundTake => lootSoundTake;
     public Animator GetLootAnimator => lootAnimator;
     public IntractiveObjectData GetLObjectToInteract => objectToInteract;
+
+
+    
 }
