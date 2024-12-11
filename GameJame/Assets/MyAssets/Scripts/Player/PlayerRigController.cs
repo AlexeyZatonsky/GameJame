@@ -55,9 +55,7 @@ public class PlayerRigController : MonoBehaviour
             StopCoroutine(weightChangeCoroutine);
         }
         
-        weightChangeCoroutine = StartCoroutine(ChangeWeights(0, 0));
-        leftHandRotationConstraint.weight = 0;
-        rightHandRotationConstraint.weight = 0;
+        weightChangeCoroutine = StartCoroutine(ChangeWeights(0, 0, 0, 0));
     }
 
     private void HoldItem()
@@ -67,17 +65,22 @@ public class PlayerRigController : MonoBehaviour
             StopCoroutine(weightChangeCoroutine);
         }
         
-        weightChangeCoroutine = StartCoroutine(ChangeWeights(0, 1));
-        leftHandRotationConstraint.weight = 0;
-        rightHandRotationConstraint.weight = 1;
+        weightChangeCoroutine = StartCoroutine(ChangeWeights(0, 1, 0, 1));
     }
 
-    private IEnumerator ChangeWeights(float leftTarget, float rightTarget)
+    private IEnumerator ChangeWeights(float leftTarget, float rightTarget, float leftRotTarget, float rightRotTarget)
     {
-        while (!Mathf.Approximately(leftHandConstraint.weight, leftTarget) || !Mathf.Approximately(rightHandConstraint.weight, rightTarget))
+        while (!Mathf.Approximately(leftHandConstraint.weight, leftTarget) || 
+               !Mathf.Approximately(rightHandConstraint.weight, rightTarget) ||
+               !Mathf.Approximately(leftHandRotationConstraint.weight, leftRotTarget) ||
+               !Mathf.Approximately(rightHandRotationConstraint.weight, rightRotTarget))
         {
             leftHandConstraint.weight = Mathf.MoveTowards(leftHandConstraint.weight, leftTarget, weightHandsChangeSpeed * Time.deltaTime);
             rightHandConstraint.weight = Mathf.MoveTowards(rightHandConstraint.weight, rightTarget, weightHandsChangeSpeed * Time.deltaTime);
+            
+            leftHandRotationConstraint.weight = Mathf.MoveTowards(leftHandRotationConstraint.weight, leftRotTarget, weightHandsChangeSpeed * Time.deltaTime);
+            rightHandRotationConstraint.weight = Mathf.MoveTowards(rightHandRotationConstraint.weight, rightRotTarget, weightHandsChangeSpeed * Time.deltaTime);
+            
             yield return null;
         }
     }

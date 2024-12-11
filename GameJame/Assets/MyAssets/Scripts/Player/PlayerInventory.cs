@@ -9,7 +9,7 @@ public class PlayerInventory : MonoBehaviour
 
     public event Action<Loot> OnItemChanged;
 
-    private void Awake()
+    private void Start()
     {
         OnItemChanged?.Invoke(null);
     }
