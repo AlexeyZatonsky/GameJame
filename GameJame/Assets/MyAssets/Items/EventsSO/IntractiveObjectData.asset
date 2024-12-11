@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 016f0e1f4848c364fa0689df622eec37, type: 3}
+  m_Name: IntractiveObjectData
+  m_EditorClassIdentifier: 
+  interactObjectName: 
+  interactObjectDescription: 
+  interactObjectPrefab: {fileID: 0}
+  interactObjectSound: {fileID: 0}
+  cantInteractSound: {fileID: 0}
+  interactObjectAnimator: {fileID: 0}
