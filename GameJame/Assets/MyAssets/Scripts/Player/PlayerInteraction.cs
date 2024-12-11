@@ -6,41 +6,52 @@ public class PlayerInteraction : MonoBehaviour
     [SerializeField] private float interactionDistance = 5f;
     [SerializeField] private LayerMask interactionLayers;
 
-    [SerializeField] private Camera playerCamera;
+    private Camera playerCamera;
+    private PlayerInventory playerInventory;
 
     private void Awake()
     {
         var playerCameraComponent = GetComponentInChildren<PlayerCamera>();
         if (playerCameraComponent != null)
         {
-
-
             playerCamera = playerCameraComponent.GetComponentInChildren<Camera>();
-
         }
+
+        playerInventory = GetComponent<PlayerInventory>();
     }
 
     private void Update()
     {
+        HandleInput();
+    }
+
+    private void HandleInput()
+    {
         if (InputManager.Instance.IsInteract())
         {
-            Ray ray = playerCamera.ScreenPointToRay(new Vector3(Screen.width / 2, Screen.height / 2, 0));
-            RaycastHit hit;
+            TryInteract();
+        }
+    }
 
-            Debug.DrawRay(ray.origin, ray.direction * interactionDistance, Color.green,20f);
-            //Debug.Log("sdsd");
+    private void TryInteract()
+    {
+        Ray ray = playerCamera.ScreenPointToRay(new Vector3(Screen.width / 2, Screen.height / 2, 0));
+        RaycastHit hit;
 
-            if (Physics.Raycast(ray, out hit, interactionDistance, interactionLayers))
+        if (Physics.Raycast(ray, out hit, interactionDistance, interactionLayers))
+        {
+            Loot loot = hit.collider.GetComponent<Loot>();
+            if (loot != null)
             {
+                playerInventory.PickupItem(loot);
+                return;
+            }
 
-                IInteractive interactive = hit.collider.GetComponent<IInteractive>();
-                if (interactive != null)
-                {
-                    interactive.Interact();
-                    Debug.DrawRay(ray.origin, ray.direction * hit.distance, Color.red, 20f);
-                }
+            IInteractive interactive = hit.collider.GetComponent<IInteractive>();
+            if (interactive != null)
+            {
+                interactive.Interact();
             }
         }
-        
     }
 }

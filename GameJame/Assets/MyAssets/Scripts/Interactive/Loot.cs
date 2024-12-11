@@ -1,10 +1,17 @@
 using System;
 using UnityEngine;
 
-public class Loot : MonoBehaviour
+public class Loot : MonoBehaviour, IInteractive
 {
     [SerializeField] private LootData lootData;
     
+    public void Interact()
+    {
+        Debug.Log("Interact");
+    }
+
     void OnMouseEnter() { /* Подсветка */ }
     void OnMouseExit() { /* Убираем подсветку */ }
+
+    public LootData GetLootData => lootData;
 }

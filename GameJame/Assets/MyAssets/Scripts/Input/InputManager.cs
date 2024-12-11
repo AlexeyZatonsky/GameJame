@@ -11,6 +11,7 @@ public class InputManager : MonoBehaviour
     private InputAction playerRunAction;
     private InputAction playerCameraRotateAction;
     private InputAction playerInteractAction;
+    private InputAction playerDropItemAction;
 
     private void Awake()
     {
@@ -28,6 +29,7 @@ public class InputManager : MonoBehaviour
         playerRunAction = playerInput.Player.Run;
         playerCameraRotateAction = playerInput.Player.CameraRotate;
         playerInteractAction = playerInput.Player.Interact;
+        playerDropItemAction = playerInput.Player.Drop;
     }
 
     private void OnEnable()
@@ -36,6 +38,7 @@ public class InputManager : MonoBehaviour
         playerRunAction.Enable();
         playerCameraRotateAction.Enable();
         playerInteractAction.Enable();
+        playerDropItemAction.Enable();
     }
 
     private void OnDisable()
@@ -44,6 +47,7 @@ public class InputManager : MonoBehaviour
         playerRunAction.Disable();
         playerCameraRotateAction.Disable();
         playerInteractAction.Disable();
+        playerDropItemAction.Disable();
     }
 
 
@@ -51,4 +55,5 @@ public class InputManager : MonoBehaviour
     public Vector2 GetCameraRotateInput() => playerCameraRotateAction.ReadValue<Vector2>();
     public bool IsRunning() => playerRunAction.IsPressed();
     public bool IsInteract() => playerInteractAction.WasPressedThisFrame();
+    public bool IsDropItem() => playerDropItemAction.WasPressedThisFrame();
 }
