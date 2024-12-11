@@ -91,13 +91,13 @@ public class EventObject : InteractiveObject
     {
         ChangeView(); // Восстановление цвета объекта
 
-        if (HintUI.Instance != null)
-        {
-            HintUI.Instance.HideTooltip();
-        }
-        else
-        {
-            Debug.LogError("HintUI instance is not initialized!");
-        }
+        // if (HintUI.Instance != null)
+        // {
+        //     HintUI.Instance.HideTooltip();
+        // }
+        // else
+        // {
+        //     Debug.LogError("HintUI instance is not initialized!");
+        // }
     }
 }
