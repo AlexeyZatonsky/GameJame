@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using UnityEngine;
 
 
 
@@ -16,10 +17,24 @@
   ...
 */
 
-
+/// <summary>
+/// Это маленькие и ключевые эвенты которые нужно закрыть
+/// маленькие евенты то, что нужно выполнить пользователю
+/// для выполнения основного евента
+/// Синглтончик 
+/// 
+/// </summary>
 public class EventManager : SingletonManager<EventManager>
 {
+    ///<summary> основные евенты </summary>
+    [SerializeField] private List<Event> events = new List<Event>(); 
     
+
     
-    
+
+
+    private void Awake()
+    {
+        
+    }
 }

@@ -10,6 +10,7 @@ public class Loot : MonoBehaviour, IInteractive
         Debug.Log("Interact");
     }
 
+    // Эта логика вообще походу не сюда
     void OnMouseEnter() { /* Подсветка */ }
     void OnMouseExit() { /* Убираем подсветку */ }
 

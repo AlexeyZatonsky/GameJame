@@ -2,31 +2,29 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 
-public enum EventObjState
-{
-    NeedToFix,Fixed
-}
+
 
 public class EventObject : InteractiveObject
 {
-    [SerializeField] private List<LootData> lootDatasList = new List<LootData>();
-    [SerializeField] private EventObjState state;
+    [SerializeField] private EventData eventData;
     [SerializeField] private IntractiveObjectData interactiveObjectData;
 
     [SerializeField] private Renderer objectRenderer;
-    public EventObjState State => state;
+    
 
 
     private void Awake()
     {
         objectRenderer = GetComponent<Renderer>();
         ChangeView();
+        
+        eventData.SetEventObjState(EventObjState.NeedToFix);
     }
 
     public override void Interact()
     {
         base.Interact();
-        if (state == EventObjState.Fixed)
+        if (eventData.GetEventObjState == EventObjState.Fixed)
         {
             return;
         }
@@ -47,7 +45,7 @@ public class EventObject : InteractiveObject
 
     public void ChangeState()
     {
-        state = EventObjState.Fixed;
+        eventData.SetEventObjState(EventObjState.Fixed);
         canInteract = false;
         ChangeView();
         Debug.Log("Fixed");
@@ -57,7 +55,7 @@ public class EventObject : InteractiveObject
     {
         if (objectRenderer != null)
         {
-            if (state == EventObjState.Fixed)
+            if (eventData.GetEventObjState == EventObjState.Fixed)
             {
                 objectRenderer.material.color = Color.green;
             }
@@ -77,7 +75,7 @@ public class EventObject : InteractiveObject
         //String objectDescription = interactiveObjectData.GetInteractObjectDescription;
         float TestDistance = 3f;
 
-        if (state == EventObjState.Fixed)
+        if (eventData.GetEventObjState == EventObjState.Fixed)
         {
             return;
         }
