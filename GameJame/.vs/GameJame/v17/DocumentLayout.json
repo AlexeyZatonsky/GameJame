@@ -3,11 +3,19 @@
   "WorkspaceRootPath": "E:\\Obsidian\\vaults\\GameJame\\GameJame\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{FC18D914-96C2-CAC7-D50A-B15B26CC7C0B}|Assembly-CSharp.csproj|e:\\obsidian\\vaults\\gamejame\\gamejame\\assets\\myassets\\scripts\\managers\\timemanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{FC18D914-96C2-CAC7-D50A-B15B26CC7C0B}|Assembly-CSharp.csproj|e:\\obsidian\\vaults\\gamejame\\gamejame\\assets\\myassets\\scripts\\managers\\cutscenemanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{FC18D914-96C2-CAC7-D50A-B15B26CC7C0B}|Assembly-CSharp.csproj|solutionrelative:assets\\myassets\\scripts\\managers\\cutscenemanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{FC18D914-96C2-CAC7-D50A-B15B26CC7C0B}|Assembly-CSharp.csproj|e:\\obsidian\\vaults\\gamejame\\gamejame\\assets\\myassets\\scripts\\interactive\\eventobject.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{FC18D914-96C2-CAC7-D50A-B15B26CC7C0B}|Assembly-CSharp.csproj|solutionrelative:assets\\myassets\\scripts\\interactive\\eventobject.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{FC18D914-96C2-CAC7-D50A-B15B26CC7C0B}|Assembly-CSharp.csproj|E:\\Obsidian\\vaults\\GameJame\\GameJame\\assets\\myassets\\scripts\\managers\\timemanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{FC18D914-96C2-CAC7-D50A-B15B26CC7C0B}|Assembly-CSharp.csproj|solutionrelative:assets\\myassets\\scripts\\managers\\timemanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{FC18D914-96C2-CAC7-D50A-B15B26CC7C0B}|Assembly-CSharp.csproj|e:\\obsidian\\vaults\\gamejame\\gamejame\\assets\\myassets\\scripts\\interactive\\interactiveobject.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{FC18D914-96C2-CAC7-D50A-B15B26CC7C0B}|Assembly-CSharp.csproj|E:\\Obsidian\\vaults\\GameJame\\GameJame\\assets\\myassets\\scripts\\interactive\\interactiveobject.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{FC18D914-96C2-CAC7-D50A-B15B26CC7C0B}|Assembly-CSharp.csproj|solutionrelative:assets\\myassets\\scripts\\interactive\\interactiveobject.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
@@ -15,12 +23,8 @@
       "RelativeMoniker": "D:0:0:{FC18D914-96C2-CAC7-D50A-B15B26CC7C0B}|Assembly-CSharp.csproj|solutionrelative:assets\\myassets\\scripts\\intarfaces\\iinteractive.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{FC18D914-96C2-CAC7-D50A-B15B26CC7C0B}|Assembly-CSharp.csproj|e:\\obsidian\\vaults\\gamejame\\gamejame\\assets\\myassets\\scripts\\managers\\eventobjectmanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{FC18D914-96C2-CAC7-D50A-B15B26CC7C0B}|Assembly-CSharp.csproj|E:\\Obsidian\\vaults\\GameJame\\GameJame\\assets\\myassets\\scripts\\managers\\eventobjectmanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{FC18D914-96C2-CAC7-D50A-B15B26CC7C0B}|Assembly-CSharp.csproj|solutionrelative:assets\\myassets\\scripts\\managers\\eventobjectmanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{FC18D914-96C2-CAC7-D50A-B15B26CC7C0B}|Assembly-CSharp.csproj|e:\\obsidian\\vaults\\gamejame\\gamejame\\assets\\myassets\\scripts\\interactive\\eventobject.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{FC18D914-96C2-CAC7-D50A-B15B26CC7C0B}|Assembly-CSharp.csproj|solutionrelative:assets\\myassets\\scripts\\interactive\\eventobject.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -30,24 +34,37 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 1,
+          "SelectedChildIndex": 0,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 0,
+              "Title": "CutsceneManager.cs",
+              "DocumentMoniker": "E:\\Obsidian\\vaults\\GameJame\\GameJame\\Assets\\MyAssets\\Scripts\\Managers\\CutsceneManager.cs",
+              "RelativeDocumentMoniker": "Assets\\MyAssets\\Scripts\\Managers\\CutsceneManager.cs",
+              "ToolTip": "E:\\Obsidian\\vaults\\GameJame\\GameJame\\Assets\\MyAssets\\Scripts\\Managers\\CutsceneManager.cs",
+              "RelativeToolTip": "Assets\\MyAssets\\Scripts\\Managers\\CutsceneManager.cs",
+              "ViewState": "AgIAAA0AAAAAAAAAAAAgwCcAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-12-11T19:50:09.516Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
               "Title": "EventObject.cs",
               "DocumentMoniker": "E:\\Obsidian\\vaults\\GameJame\\GameJame\\Assets\\MyAssets\\Scripts\\Interactive\\EventObject.cs",
               "RelativeDocumentMoniker": "Assets\\MyAssets\\Scripts\\Interactive\\EventObject.cs",
               "ToolTip": "E:\\Obsidian\\vaults\\GameJame\\GameJame\\Assets\\MyAssets\\Scripts\\Interactive\\EventObject.cs",
               "RelativeToolTip": "Assets\\MyAssets\\Scripts\\Interactive\\EventObject.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAAEIAAAAAAAAAAAAmwEkAAAAIAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-12-10T21:35:24.224Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 2,
               "Title": "TimeManager.cs",
               "DocumentMoniker": "E:\\Obsidian\\vaults\\GameJame\\GameJame\\Assets\\MyAssets\\Scripts\\Managers\\TimeManager.cs",
               "RelativeDocumentMoniker": "Assets\\MyAssets\\Scripts\\Managers\\TimeManager.cs",
@@ -55,12 +72,11 @@
               "RelativeToolTip": "Assets\\MyAssets\\Scripts\\Managers\\TimeManager.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAEoAAAAOAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-12-10T21:13:18.004Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-12-10T21:13:18.004Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 3,
               "Title": "InteractiveObject.cs",
               "DocumentMoniker": "E:\\Obsidian\\vaults\\GameJame\\GameJame\\Assets\\MyAssets\\Scripts\\Interactive\\InteractiveObject.cs",
               "RelativeDocumentMoniker": "Assets\\MyAssets\\Scripts\\Interactive\\InteractiveObject.cs",
@@ -68,12 +84,11 @@
               "RelativeToolTip": "Assets\\MyAssets\\Scripts\\Interactive\\InteractiveObject.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-12-10T20:29:03.33Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-12-10T20:29:03.33Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 5,
               "Title": "EventObjectManager.cs",
               "DocumentMoniker": "E:\\Obsidian\\vaults\\GameJame\\GameJame\\Assets\\MyAssets\\Scripts\\Managers\\EventObjectManager.cs",
               "RelativeDocumentMoniker": "Assets\\MyAssets\\Scripts\\Managers\\EventObjectManager.cs",
@@ -81,12 +96,11 @@
               "RelativeToolTip": "Assets\\MyAssets\\Scripts\\Managers\\EventObjectManager.cs",
               "ViewState": "AgIAABsAAAAAAAAAAAAowCYAAABWAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-12-10T19:30:48.713Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-12-10T19:30:48.713Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 4,
               "Title": "IInteractive.cs",
               "DocumentMoniker": "E:\\Obsidian\\vaults\\GameJame\\GameJame\\Assets\\MyAssets\\Scripts\\Intarfaces\\IInteractive.cs",
               "RelativeDocumentMoniker": "Assets\\MyAssets\\Scripts\\Intarfaces\\IInteractive.cs",
@@ -94,8 +108,7 @@
               "RelativeToolTip": "Assets\\MyAssets\\Scripts\\Intarfaces\\IInteractive.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAQAAAANAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-12-10T17:26:30.332Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-12-10T17:26:30.332Z"
             }
           ]
         }
