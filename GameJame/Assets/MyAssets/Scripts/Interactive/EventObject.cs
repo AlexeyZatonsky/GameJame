@@ -11,7 +11,7 @@ public class EventObject : InteractiveObject
 {
     [SerializeField] private List<LootData> lootDatasList = new List<LootData>();
     [SerializeField] private EventObjState state;
-    private IntractiveObjectData interactiveObjectData;
+    [SerializeField] private IntractiveObjectData interactiveObjectData;
 
     [SerializeField] private Renderer objectRenderer;
     public EventObjState State => state;
@@ -71,7 +71,10 @@ public class EventObject : InteractiveObject
 
     public void OnMouseOver()
     {
-        String objectDescription = interactiveObjectData.GetInteractObjectDescription;
+        
+        Debug.Log("OnMouseOver");
+        Debug.Log(interactiveObjectData.GetInteractObjectName);
+        //String objectDescription = interactiveObjectData.GetInteractObjectDescription;
         float TestDistance = 3f;
 
         if (state == EventObjState.Fixed)
@@ -81,7 +84,7 @@ public class EventObject : InteractiveObject
 
         objectRenderer.material.color = Color.yellow;
 
-        HintUI.Instance.ShowHint(objectDescription);
+        //HintUI.Instance.ShowHint(objectDescription);
     }
 
     public void OnMouseExit()

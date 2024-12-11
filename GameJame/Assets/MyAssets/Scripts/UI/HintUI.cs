@@ -5,7 +5,7 @@ using UnityEngine.UI;
 public class HintUI : SingletonManager<HintUI>
 {
     [SerializeField] private GameObject HintPanel;
-    [SerializeField] private TextMeshPro HintText; //не робит пока
+    [SerializeField] private TextMeshProUGUI HintText;
 
     protected override void Awake()
     {
