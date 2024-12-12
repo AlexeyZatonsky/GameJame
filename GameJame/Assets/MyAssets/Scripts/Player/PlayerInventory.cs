@@ -88,6 +88,19 @@ public class PlayerInventory : MonoBehaviour
     
     
     //TODO: Метод для удаления предмета 
-    
+    public void DestroyItem()
+    {
+        if (currentItem == null) return;
+       
+        //Типа предмет рассыпается или что-то в этом роде
+        //currentItem.GetLootData.GetLootDestroyAnimator?. //анимация 
+        //currentItem.GetLootData.GetLootDestroySound?. //звук
+        
+        
+        Destroy(currentItem.gameObject);
+        
+        currentItem = null;
+        OnItemChanged?.Invoke(null); //вызвать в конце
+    }
 }
 

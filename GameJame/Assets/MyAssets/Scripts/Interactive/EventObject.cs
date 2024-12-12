@@ -40,10 +40,10 @@ public class EventObject : InteractiveObject
 
             bool isCanFixOfLoot = _canFixOfLoot(NeedLootData, currentLootData);
             bool isCanFixOfFirstEvents = _canFixOfMiniEvents(eventsToFixFirst);
-            
-            if(isCanFixOfLoot && isCanFixOfFirstEvents)
-                ChangeState();
 
+            if (isCanFixOfLoot && isCanFixOfFirstEvents)
+                ChangeState();
+            
         }
 
     }
@@ -79,11 +79,15 @@ public class EventObject : InteractiveObject
     /// <returns>Bool</returns>
     private bool _canFixOfLoot(LootData needLootData, LootData inInventoryLootData)
     {
+        if(needLootData == null) return true;
+        
         if (needLootData != inInventoryLootData)
         {
             Debug.LogError("У вас нет подходящего предмета для починки");
             return false;
         }
+        
+        playerInventory.DestroyItem();
         return true;
     }
 
