@@ -123,6 +123,8 @@ public class GameManager : MonoBehaviour
         playerInfo.GetComponent<PlayerInventory>().DropItem(true, 2f);
 
         PlayerSleeping();
+
+        SubtitlesManager.Instance.PlayDialogue("D_Bed");
         
         yield return StartCoroutine(goBedUI.FadeBlackScreen(false, blackScreenSpeedFade, delayBeforeBlackScreenFadeOut));
     }
