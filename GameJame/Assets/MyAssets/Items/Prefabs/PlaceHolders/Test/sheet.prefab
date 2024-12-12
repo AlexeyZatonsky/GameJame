@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 1379146729888175406}
   - component: {fileID: 1022949919692007308}
   - component: {fileID: 3808251942208146022}
+  - component: {fileID: -5473453342513804013}
   m_Layer: 6
   m_Name: sheet
   m_TagString: Untagged
@@ -150,3 +151,21 @@ Rigidbody:
   m_Interpolate: 1
   m_Constraints: 0
   m_CollisionDetection: 2
+--- !u!114 &-5473453342513804013
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7069319027492404107}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 99393b134a3fe13489656b6848036f4c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  outlineMode: 1
+  outlineColor: {r: 0.3222063, g: 0.8490566, b: 0.01201493, a: 1}
+  outlineWidth: 2
+  player: {fileID: 0}
+  activationDistance: 5
+  precomputeOutline: 0

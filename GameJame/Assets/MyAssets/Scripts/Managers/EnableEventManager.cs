@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using Unity.VisualScripting;
 using UnityEngine;
 
@@ -39,9 +40,12 @@ public class EnableEventManager : SingletonManager<EnableEventManager>
 
     
 
-    private void Awake()
+    protected override void Awake()
     {
+        base.Awake();
+
         Debug.LogError("EventManager: Awake");
+        EventObject[] local_events = GetComponentsInChildren<EventObject>();
         events.AddRange(eventsPull.GetComponentsInChildren<EventObject>());
         
         
@@ -57,23 +61,40 @@ public class EnableEventManager : SingletonManager<EnableEventManager>
         Debug.LogError("EventManager: setRandomStateToEvents");
         
         if (events.Count < 1) Debug.LogError("EventManager: setRandomStateToEvents: events.Count < 1");
-        
-        foreach (EventObject eventObject in events)
+
+        //foreach (EventObject eventObject in events)
+        //{
+        //    Debug.LogError("EnableEventManager : SetRandomStateToEvents : Foreach");
+        //    if (eventObject.GetEventData().GetDatasEventsToFixFirst.Count > 0)
+        //    {
+        //        setOriginState(eventObject, EventObjState.NeedToFix);
+        //        continue;
+        //    }
+
+        //    float randomValue = Random.Range(0f, 1f);
+        //    Debug.LogError("чиcло = " + randomValue + " для " + eventObject.GetEventData().GetEventName);
+
+        //    if (randomValue <= FixedEventChance)
+        //        setOriginState(eventObject, EventObjState.Fixed);
+        //    else
+        //        setOriginState(eventObject, EventObjState.NeedToFix);
+        //}
+        for (int i = 0; i <= events.Count() - 1; i++)
         {
-            Debug.LogError("EnableEventManager : SetRandomStateToEvents : Foreach");
-            if (eventObject.GetEventData().GetDatasEventsToFixFirst.Count > 0)
+            //Debug.LogError("EnableEventManager : SetRandomStateToEvents : Foreach");
+            if (events[i].GetEventData().GetDatasEventsToFixFirst.Count > 0)
             {
-                setOriginState(eventObject, EventObjState.NeedToFix);
+                setOriginState(events[i], EventObjState.NeedToFix);
                 continue;
             }
 
             float randomValue = Random.Range(0f, 1f);
-            Debug.LogError("чиcло = " + randomValue + " для " + eventObject.GetEventData().GetEventName);
-            
+            Debug.LogError("чиcло = " + randomValue + " для " + events[i].GetEventData().GetEventName);
+
             if (randomValue <= FixedEventChance)
-                setOriginState(eventObject, EventObjState.Fixed);
+                setOriginState(events[i], EventObjState.Fixed);
             else
-                setOriginState(eventObject, EventObjState.NeedToFix);
+                setOriginState(events[i], EventObjState.NeedToFix);
         }
     }
     

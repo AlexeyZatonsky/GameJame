@@ -68,21 +68,23 @@ public class InteractiveOutline : MonoBehaviour
     [SerializeField]
     private bool precomputeOutline;
 
-    private Renderer[] renderers;
-    private Material outlineMaskMaterial;
-    private Material outlineFillMaterial;
+    [SerializeField] private Renderer[] renderers;
+    [SerializeField] private Material outlineMaskMaterial;
+    [SerializeField] private Material outlineFillMaterial;
 
     private bool needsUpdate;
     private bool isMouseOver = false;
 
     void Awake()
     {
+        player = GameObject.FindWithTag("Player").transform;
         // Cache renderers
         renderers = GetComponentsInChildren<Renderer>();
-
+        Debug.LogError("InteractiveOutLine Awake1");
         // Instantiate outline materials
         outlineMaskMaterial = Instantiate(Resources.Load<Material>("Materials/OutlineMask"));
         outlineFillMaterial = Instantiate(Resources.Load<Material>("Materials/OutlineFill"));
+        Debug.LogError("InteractiveOutLine Awake2");
 
         outlineMaskMaterial.name = "OutlineMask (Instance)";
         outlineFillMaterial.name = "OutlineFill (Instance)";
@@ -94,7 +96,8 @@ public class InteractiveOutline : MonoBehaviour
         // Apply material properties immediately
         needsUpdate = true;
 
-        player = GameObject.FindWithTag("Player").transform;
+        
+        //Debug.LogError(GameObject.FindWithTag("Player"));
 
 
     }
