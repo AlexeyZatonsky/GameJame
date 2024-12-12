@@ -30,7 +30,7 @@ public class MainMenuManager : MonoBehaviour
 
     private void StartGame()
     {
-        SceneManager.LoadScene("MainLevel");
+        SceneManager.LoadScene("CutScene");
     }
 
     private void OpenSetting()
