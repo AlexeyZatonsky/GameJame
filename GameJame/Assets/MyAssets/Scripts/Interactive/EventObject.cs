@@ -33,43 +33,62 @@ public class EventObject : InteractiveObject
         }
         else
         {
-            // TODO: Проверка лута в руках из PlayerInventory.GetCurrentItem
 
-          
+            LootData NeedLootData = eventData.GetDataLootToFix;
             LootData currentLootData = playerInventory.GetCurrentItem?.GetLootData;
-        
             List<EventData> eventsToFixFirst = eventData.GetDatasEventsToFixFirst;
 
-            if (eventsToFixFirst.Count == 0)
+            bool isCanFixOfLoot = _canFixOfLoot(NeedLootData, currentLootData);
+            bool isCanFixOfFirstEvents = _canFixOfMiniEvents(eventsToFixFirst);
+            
+            if(isCanFixOfLoot && isCanFixOfFirstEvents)
                 ChangeState();
-            
-            foreach (EventData eventNeedToFix in eventsToFixFirst)
-            {
-                if (eventNeedToFix.GetEventObjState == EventObjState.NeedToFix)
-                {
-                    Debug.LogError(eventNeedToFix.name + " is not fixing ");
-                }
-                else
-                {
-                    ChangeState();
-                }
-            }
-
-            
-            
 
         }
 
     }
 
+
+
+    /// <summary>
+    /// Чисто приватный метод для проверки
+    /// того, выполнил ли игрок все мини евенты перед
+    /// финальным 
+    /// </summary>
+    /// <param name="eventsToFixFirst">SO евентов которые предстоит
+    /// выполнить перед основным</param>
+    /// <returns>Bool</returns>
+    private bool _canFixOfMiniEvents(List<EventData> eventsToFixFirst)
+    {
+        foreach (EventData eventNeedToFix in eventsToFixFirst)
+        {
+            if (eventNeedToFix.GetEventObjState == EventObjState.NeedToFix)
+            {
+                Debug.LogError("Сначала почини" + eventNeedToFix.name);
+                return false;
+            }
+        }
+        return true;
+    }
+
+    /// <summary>
+    /// Подходит ли лут в руках к луту нужному для починки
+    /// </summary>
+    /// <param name="needLootData">Нужный лут для починки</param>
+    /// <param name="inInventoryLootData">Лут в руках</param>
+    /// <returns>Bool</returns>
+    private bool _canFixOfLoot(LootData needLootData, LootData inInventoryLootData)
+    {
+        if (needLootData != inInventoryLootData)
+        {
+            Debug.LogError("У вас нет подходящего предмета для починки");
+            return false;
+        }
+        return true;
+    }
+
     public void ChangeState()
     {
-            /*if (eventNeedToFix.GetEventObjState == EventObjState.NeedToFix)
-            {
-                Debug.LogError(eventNeedToFix.name + " is not fixing ");
-                return;
-            }*/
-        
         eventData.SetEventObjState(EventObjState.Fixed);
         canInteract = false;
         ChangeView();
