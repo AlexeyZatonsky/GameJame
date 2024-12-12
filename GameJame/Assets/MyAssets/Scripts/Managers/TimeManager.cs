@@ -1,100 +1,106 @@
-using System;
-using TMPro;
-using Unity.VisualScripting;
+using System.Collections;
 using UnityEngine;
+using TMPro;
+using System;
 
-public class TimeManager : SingletonManager<TimeManager>
+public class TimeManager : MonoBehaviour
 {
-    // UI
+    public static TimeManager Instance { get; private set; }
+
+    [Header("UI")]
+    [SerializeField] private GameObject timerUI;
     [SerializeField] private TMP_Text timerText;
 
-    //Vars
-    [SerializeField] private float timerDuration = 10f;
     private float currentTime;
 
-    [SerializeField] private bool halfcomplete = false;
-    [SerializeField] private bool colorRed = false;
-    [SerializeField] private bool haveChance = true;
+    private GameManager gameManager;
 
-    public bool HaveChance => haveChance;
+    public event Action OnTimerEnd;
 
-    // Events
-    public Action OnTimerStart;
-    public Action OnTimerStop;
-    public Action OnHalfTime;
+    private Coroutine timerCoroutine;
 
-
-    //Timer Status
-    [SerializeField] private bool isTimerRunning = false;
-
-    void Start()
+    private void Awake()
     {
-        currentTime = timerDuration;
+        if (Instance != null && Instance != this)
+        {
+            Destroy(gameObject);
+            return;
+        }
+        Instance = this;
+        //DontDestroyOnLoad(gameObject);
+
+        gameManager = FindFirstObjectByType<GameManager>();
     }
 
-    void Update()
+    private void OnEnable()
     {
-        if (!isTimerRunning) { 
-            return; 
-        }
-        else
+        gameManager.OnGameStateChanged += ChangeTimer;
+    }
+
+    private void OnDisable()
+    {
+        gameManager.OnGameStateChanged -= ChangeTimer;
+    }
+
+    private void ChangeTimer(GameState state)
+    {
+        if (state == GameState.FirstTimer)
         {
-            // Update Text
+            StartTimer();
+        }
+        else if (state == GameState.LastChanceTimer)
+        {
+            StartLastChanceTimer();
+        }
+    }
+
+    private IEnumerator TimerCoroutine()
+    {
+        while (currentTime > 0)
+        {
             int minutes = Mathf.FloorToInt(currentTime / 60f);
             int seconds = Mathf.FloorToInt(currentTime % 60f);
             timerText.SetText($"{minutes:00}:{seconds:00}");
-            currentTime -= Time.deltaTime;  // Time less
-
-            if (!colorRed && currentTime <= timerDuration * 0.25f)
+            
+            if (currentTime <= gameManager.GetTimeToBed() * 0.25f)
             {
-                colorRed = true;
                 timerText.color = Color.red;
             }
-            else if (!halfcomplete && currentTime <= timerDuration * 0.5f)
+            else if (currentTime <= gameManager.GetTimeToBed() * 0.5f)
             {
-                halfcomplete = true;
-                OnHalfTime?.Invoke();
                 timerText.color = Color.yellow;
             }
 
-
-            if (currentTime <= 0 )
-            {
-                StopTimer();
-            }
+            currentTime -= Time.deltaTime;
+            yield return null;
         }
+        
+        currentTime = 0;
+        timerText.SetText("00:00");
+        timerText.color = Color.red;
+        timerCoroutine = null;
+
+        OnTimerEnd?.Invoke();
     }
 
-    public void StartTimer()
+    private void StartTimer()
     {
-        if (!isTimerRunning)
-        {
-            //currentTime = timerDuration;  //reset
-            isTimerRunning = true;
-            OnTimerStart?.Invoke();
-            haveChance = false;
-        }
+        currentTime = gameManager.GetTimeToBed();
+        timerText.color = Color.white;
+        timerCoroutine = StartCoroutine(TimerCoroutine());
+        SetTimerUI(true);
     }
 
-    public void StopTimer()
+    private void StartLastChanceTimer()
     {
-        if (isTimerRunning)
-        {
-            isTimerRunning = false;
-            
-            OnTimerStop?.Invoke();
-            
-        }
+        currentTime = gameManager.GetTimeForLastChance();
+        timerText.color = Color.white;
+        timerCoroutine = StartCoroutine(TimerCoroutine());
+        SetTimerUI(true);
     }
 
-    public void AddTime(float amount)
+    public void SetTimerUI(bool isActive)
     {
-        currentTime += amount;
-        if (!haveChance) { return; }
-        //currentTime += amount;
-        StartTimer();
-        //currentTime = Mathf.Clamp(currentTime, 0, timerDuration);
+        timerUI.SetActive(isActive);
     }
-
-
 }

@@ -14,16 +14,22 @@ public class PlayerRigController : MonoBehaviour
     [SerializeField] private MultiRotationConstraint leftHandRotationConstraint;
     [SerializeField] private MultiRotationConstraint rightHandRotationConstraint;
 
+    [Header("Body")]
+    [SerializeField] private MultiAimConstraint upperChestConstraint;
+    [SerializeField] private MultiAimConstraint headConstraint;
+
     [Header("Settings")]
     [SerializeField] private float weightHandsChangeSpeed = 5f;
 
     private PlayerInventory playerInventory;
+    private Animator animator;
 
     private Coroutine weightChangeCoroutine;
 
     private void Awake()
     {
         playerInventory = GetComponent<PlayerInventory>();
+        animator = GetComponent<Animator>();
     }
 
     private void OnEnable()
@@ -56,6 +62,7 @@ public class PlayerRigController : MonoBehaviour
         }
         
         weightChangeCoroutine = StartCoroutine(ChangeWeights(0, 0, 0, 0));
+        animator.SetLayerWeight(animator.GetLayerIndex("Interact_Layer"), 0f);
     }
 
     private void HoldItem()
@@ -66,6 +73,7 @@ public class PlayerRigController : MonoBehaviour
         }
         
         weightChangeCoroutine = StartCoroutine(ChangeWeights(0, 1, 0, 1));
+        animator.SetLayerWeight(animator.GetLayerIndex("Interact_Layer"), 1f);
     }
 
     private IEnumerator ChangeWeights(float leftTarget, float rightTarget, float leftRotTarget, float rightRotTarget)
@@ -83,6 +91,12 @@ public class PlayerRigController : MonoBehaviour
             
             yield return null;
         }
+    }
+
+    public void SetHeadUpperChestWeight(float weight)
+    {
+        upperChestConstraint.weight = weight;
+        headConstraint.weight = weight;
     }
 }
 

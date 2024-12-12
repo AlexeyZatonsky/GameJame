@@ -8,14 +8,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private float smoothMoveTime = 0.1f;
     [SerializeField] private float smoothStopTime = 0.5f;
 
-    [Header("Настройки приседания")]
-    [SerializeField] private float crouchHeight = 1.0f;
-    [SerializeField] private float crouchCenter = 0.5f;
-    [SerializeField] private float standHeight = 1.8f;
-    [SerializeField] private float standCenter = 0.9f;
-
-    [Header("Настройки прыжка")]
-    [SerializeField] private float jumpHeight = 2.0f;
+    [Header("Настройки гравитации")]
     [SerializeField] private float gravity = -9.81f;
     [SerializeField] private LayerMask groundMask;
     [SerializeField] private float groundCheckRadius = 0.3f;
@@ -39,8 +32,8 @@ public class PlayerMovement : MonoBehaviour
     private CharacterController characterController;
     private Animator animator;
 
+    private bool canMove = true;
     private bool isRunning = false;
-    private bool isCrouching = false;
     private bool isGrounded = true;
 
     private void Awake()
@@ -50,9 +43,32 @@ public class PlayerMovement : MonoBehaviour
 
     private void Update()
     {
+        HandleInput();
         UpdateMovement();
-        UpdateJump();
+        UpdateGravity();
         UpdateAnimation();
+    }
+
+    private void Start()
+    {
+        GameManager.Instance.OnPlayerStateChanged += ChangeCanMove;
+    }
+
+    private void OnDisable()
+    {
+        GameManager.Instance.OnPlayerStateChanged -= ChangeCanMove;
+    }
+
+    private void ChangeCanMove(PlayerState state)
+    {
+        if (state == PlayerState.Action)
+        {
+            canMove = true;
+        }
+        else
+        {
+            canMove = false;
+        }
     }
 
     private void FindAllNeedComponents()
@@ -67,10 +83,23 @@ public class PlayerMovement : MonoBehaviour
         characterController = GetComponent<CharacterController>();
     }
 
+    private void HandleInput()
+    {
+        if (canMove)
+        {
+            movementInput = InputManager.Instance.GetMovementInput();
+            isRunning = InputManager.Instance.IsRunning();
+        }
+        else
+        {
+            movementInput = Vector2.zero;
+            isRunning = false;
+        }
+    }
+
     private void UpdateMovement()
     {
-        movementInput = InputManager.Instance.GetMovementInput();
-        isRunning = InputManager.Instance.IsRunning();
+        if (!characterController.enabled) return;
 
         targetDirection = new Vector3(movementInput.x, 0, movementInput.y).normalized;
         targetSpeed = movementInput.magnitude > 0 ? (isRunning ? runSpeed : walkSpeed) : 0;
@@ -95,27 +124,23 @@ public class PlayerMovement : MonoBehaviour
             currentSpeed = Mathf.Lerp(currentSpeed, 0, Time.deltaTime / smoothStopTime);
         }
 
-        Vector3 cameraForward = cameraRootTransform.forward;
-        cameraForward.y = 0;
-        transform.rotation = Quaternion.LookRotation(cameraForward, Vector3.up);
+
+        if (canMove)
+        {
+            Vector3 cameraForward = cameraRootTransform.forward;
+            cameraForward.y = 0;
+            transform.rotation = Quaternion.LookRotation(cameraForward, Vector3.up);
+        }
 
         Vector3 movement = currentDirection * currentSpeed * Time.deltaTime;
-
         characterController.Move(movement);
-
-        if (isRunning && isCrouching)
-        {
-            UpdateCrouchState();
-        }
     }
 
-
-    private void UpdateJump()
+    private void UpdateGravity()
     {
+        if (!characterController.enabled) return;
+
         Vector3 spherePosition = transform.position + groundCheckOffset;
-
-        Debug.DrawLine(transform.position, spherePosition, Color.yellow);
-
         isGrounded = Physics.CheckSphere(spherePosition, groundCheckRadius, groundMask);
 
         if (isGrounded && velocity.y < 0)
@@ -123,33 +148,8 @@ public class PlayerMovement : MonoBehaviour
             velocity.y = -2f;
         }
 
-        /*
-        if (isGrounded && InputManager.Instance.IsJump())
-        {
-            velocity.y = Mathf.Sqrt(jumpHeight * -2f * gravity);
-        }
-        */
-
         velocity.y += gravity * Time.deltaTime;
         characterController.Move(velocity * Time.deltaTime);
-    }
-
-    private void UpdateCrouchState()
-    {
-        isCrouching = !isCrouching;
-
-        if (isCrouching)
-        {
-            characterController.height = crouchHeight;
-            characterController.center = new Vector3(0, crouchCenter, 0);
-        }
-        else
-        {
-            characterController.height = standHeight;
-            characterController.center = new Vector3(0, standCenter, 0);
-        }
-
-        animator.SetBool("IS_Crouch", isCrouching);
     }
 
     private void UpdateAnimation()

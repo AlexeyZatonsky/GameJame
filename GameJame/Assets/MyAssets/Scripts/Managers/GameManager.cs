@@ -1,0 +1,279 @@
+using System;
+using System.Collections;
+using Unity.VisualScripting;
+using UnityEngine;
+
+public enum GameState
+{
+    StartCutscene,
+    FirstTimer,
+    InBed,
+    LastChanceTimer,
+    Win,
+    Lose
+}
+
+public enum PlayerState
+{
+    NoAction,
+    Action
+}
+
+public class GameManager : MonoBehaviour
+{
+    public static GameManager Instance { get; private set; }
+
+    [Header("Game States")]
+    [SerializeField] private GameState currentState = GameState.StartCutscene;
+    [SerializeField] private PlayerState playerState = PlayerState.Action;
+
+    [Header("Timer Settings")]
+    [SerializeField] private float timeToBed = 180f;
+    [SerializeField] private float timeForLastChance = 60f;
+    [SerializeField] private float delayBeforeShowChoiceUI = 2f;
+    [SerializeField] private float delayBeforeBlackScreenFadeOut = 1f;
+    [SerializeField] private float blackScreenSpeedFade = 1f;
+    [SerializeField] private float blackScreenSpeedFadeBackMenu = 2f;
+    [SerializeField] private float delayBeforeMainMenu = 5f;
+
+    [Header("Game Settings")]
+    [SerializeField] private int unfixedEventObjectsCount = 0;
+
+    [Header("GameState Objects")]
+    [SerializeField] private Camera winCamera;
+
+    public event Action<GameState> OnGameStateChanged;
+    public event Action<PlayerState> OnPlayerStateChanged;
+
+    private EventObjectManager eventObjectManager;
+    private TimeManager timeManager;
+    private PlayerInfo playerInfo;
+    private BedController bedController;
+    private GoBedUI goBedUI;
+
+    private void Awake()
+    {
+        if (Instance != null && Instance != this)
+        {
+            Destroy(gameObject);
+            return;
+        }
+        Instance = this;
+        //DontDestroyOnLoad(gameObject);
+
+        winCamera.gameObject.SetActive(false);
+        eventObjectManager = FindFirstObjectByType<EventObjectManager>();
+        timeManager = FindFirstObjectByType<TimeManager>();
+        playerInfo = FindFirstObjectByType<PlayerInfo>();
+        bedController = FindFirstObjectByType<BedController>();
+        goBedUI = FindFirstObjectByType<GoBedUI>();
+    }
+    
+    private void Start()
+    {
+        OnGameStateChanged?.Invoke(currentState);
+        OnPlayerStateChanged?.Invoke(playerState);
+    }
+
+    private void OnEnable()
+    {
+        timeManager.OnTimerEnd += SetGameState;
+    }
+
+    private void OnDisable()
+    {
+        timeManager.OnTimerEnd -= SetGameState;
+    }
+
+    public void SetGameState()
+    {
+        switch (currentState)
+        {
+            case GameState.StartCutscene:
+                UpdateGameState(GameState.FirstTimer, PlayerState.Action);
+                break;
+            
+            case GameState.FirstTimer:
+                UpdateGameState(GameState.InBed, PlayerState.NoAction);
+                StartCoroutine(HandleBedTransition());
+                break;
+            
+            case GameState.LastChanceTimer:
+                GameState newState = CheckFixes();
+                UpdateGameState(newState, playerState);
+                StartCoroutine(HandleLastChanceTimerEnd(newState));
+                break;
+        }
+    }
+
+    private void UpdateGameState(GameState newGameState, PlayerState newPlayerState)
+    {
+        currentState = newGameState;
+        playerState = newPlayerState;
+        OnGameStateChanged?.Invoke(currentState);
+        OnPlayerStateChanged?.Invoke(playerState);
+    }
+
+    private IEnumerator HandleBedTransition()
+    {
+        yield return StartCoroutine(goBedUI.FadeBlackScreen(true, blackScreenSpeedFade));
+        
+        timeManager.SetTimerUI(false);
+        goBedUI.ShowDot(false);
+        playerInfo.GetComponent<PlayerInventory>().DropItem(true, 2f);
+
+        PlayerSleeping();
+        
+        yield return StartCoroutine(goBedUI.FadeBlackScreen(false, blackScreenSpeedFade, delayBeforeBlackScreenFadeOut));
+    }
+
+    private IEnumerator HandleLastChanceTimerEnd(GameState newState)
+    {
+        yield return StartCoroutine(goBedUI.FadeBlackScreen(true, blackScreenSpeedFade));
+        
+        if (newState == GameState.Lose) ShowLoseEnd();
+        else if (newState == GameState.Win) ShowWinEnd();
+
+        playerInfo.GetComponent<PlayerInventory>().DropItem(true, 2f);
+        
+        yield return StartCoroutine(goBedUI.FadeBlackScreen(false, blackScreenSpeedFade, delayBeforeBlackScreenFadeOut));
+    }
+
+    private void PlayerSleeping()
+    {
+        playerInfo.transform.position = bedController.GetSleepPosition.position;
+        playerInfo.transform.rotation = bedController.GetSleepPosition.rotation;
+
+        playerInfo.GetComponent<CharacterController>().enabled = false;
+        playerInfo.GetComponent<Animator>().SetBool("IS_Sleep", true);
+        playerInfo.GetComponent<Animator>().applyRootMotion = true;
+        playerInfo.GetComponent<PlayerRigController>().SetHeadUpperChestWeight(0f);
+
+        StartCoroutine(ShowChoiceUIAfterDelay());
+    }
+
+    private IEnumerator ShowChoiceUIAfterDelay()
+    {
+        yield return new WaitForSeconds(delayBeforeShowChoiceUI);
+        goBedUI.Show();
+        CursorController.Instance.ShowCursor();
+    }
+
+    private void PlayerWakeUp()
+    {
+        playerInfo.transform.position = bedController.GetWakeUpPosition.position;
+        playerInfo.transform.rotation = bedController.GetWakeUpPosition.rotation;
+
+        playerInfo.GetComponent<Animator>().SetBool("IS_Sleep", false);
+        playerInfo.GetComponent<Animator>().applyRootMotion = false;
+        playerInfo.GetComponent<CharacterController>().enabled = true;
+        playerInfo.GetComponent<PlayerRigController>().SetHeadUpperChestWeight(1f);
+    }
+
+    public void CheckButtonPressed()
+    {
+        GameState newState = CheckFixes();
+        
+        if (newState == GameState.LastChanceTimer)
+        {
+            UpdateGameState(newState, PlayerState.Action);
+            PlayerWakeUp();
+            goBedUI.ShowDot(true);
+            StartCoroutine(goBedUI.FadeBlackScreen(false, blackScreenSpeedFade, delayBeforeBlackScreenFadeOut));
+        }
+        else
+        {
+            HandleEndGame(newState);
+        }
+    }
+
+    public void SleepButtonPressed()
+    {
+        GameState newState = eventObjectManager.EventObjectsList.Count == eventObjectManager.FixedCount ? GameState.Win : GameState.Lose;
+        HandleEndGame(newState);
+    }
+
+    private void HandleEndGame(GameState newState)
+    {
+        UpdateGameState(newState, PlayerState.NoAction);
+        if (newState == GameState.LastChanceTimer || newState == GameState.Lose)
+        {
+            ShowLoseEnd();
+            StartCoroutine(goBedUI.FadeBlackScreen(false, blackScreenSpeedFade, delayBeforeBlackScreenFadeOut));
+        }
+        else if (newState == GameState.Win)
+        {
+            ShowWinEnd();
+            StartCoroutine(goBedUI.FadeBlackScreen(false, blackScreenSpeedFade, delayBeforeBlackScreenFadeOut));
+        }
+    }
+
+    private void ShowWinEnd()
+    {
+        playerState = PlayerState.NoAction;
+        OnPlayerStateChanged?.Invoke(playerState);
+
+        GameObject player = playerInfo.GameObject();
+        player.SetActive(false);
+        timeManager.SetTimerUI(false);
+        goBedUI.ShowDot(false);
+        var playerCamera = playerInfo.GetComponentInChildren<PlayerCamera>().GetComponentInChildren<Camera>();
+        playerCamera.gameObject.SetActive(false);
+        winCamera.gameObject.SetActive(true);
+
+        StartCoroutine(ReturnToMainMenu());
+    }
+
+    private void ShowLoseEnd()
+    {
+        playerState = PlayerState.NoAction;
+        OnPlayerStateChanged?.Invoke(playerState);
+        
+        // TODO: Показать экран поражения. Перенос персонажа в зал с камином, поворот назад, а там дед ебалай.
+    }
+
+    private IEnumerator ReturnToMainMenu()
+    {
+        yield return new WaitForSeconds(delayBeforeMainMenu);
+        yield return StartCoroutine(goBedUI.FadeBlackScreen(true, blackScreenSpeedFadeBackMenu));
+
+        UnityEngine.SceneManagement.SceneManager.LoadScene("MainMenu");
+    }
+
+    private GameState CheckFixes()
+    {
+        if (currentState == GameState.InBed)
+        {
+            if (eventObjectManager.EventObjectsList.Count == eventObjectManager.FixedCount)
+            {
+                return GameState.Win;
+            }
+            else if (eventObjectManager.EventObjectsList.Count - eventObjectManager.FixedCount <= unfixedEventObjectsCount)
+            {
+                return GameState.LastChanceTimer;
+            }
+            else
+            {
+                return GameState.Lose;
+            }
+        }
+        else if (currentState == GameState.LastChanceTimer)
+        {
+            if (eventObjectManager.EventObjectsList.Count == eventObjectManager.FixedCount)
+            {
+                return GameState.Win;
+            }
+            else
+            {
+                return GameState.Lose;
+            }
+        }
+
+        return currentState;
+    }
+
+    public PlayerState GetPlayerState() => playerState;
+    public GameState GetCurrentState() => currentState;
+    public float GetTimeToBed() => timeToBed;
+    public float GetTimeForLastChance() => timeForLastChance;
+}

@@ -121,3 +121,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8e30199c63878b94bb484492cb906ef8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  intractiveObjectData: {fileID: 11400000, guid: 052b7ffb36e605346b05a60dd50c5b79, type: 2}
+  canInteract: 0
+  lootDatasList: []
+  state: 0
+  interactiveObjectData: {fileID: 0}
+  objectRenderer: {fileID: 0}

@@ -3617,6 +3617,7 @@ GameObject:
   - component: {fileID: 5790063697769235665}
   - component: {fileID: 7203226376917559123}
   - component: {fileID: 4305037134238308060}
+  - component: {fileID: 1061195304235126950}
   - component: {fileID: 3499003654961136564}
   - component: {fileID: 7940579354559522038}
   - component: {fileID: 6679329080435366761}
@@ -3696,6 +3697,18 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &1061195304235126950
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8359663886984168038}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 43ea00d068a30884ba447a66cdc873a4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &3499003654961136564
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3710,13 +3723,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   walkSpeed: 2
   runSpeed: 6
-  smoothMoveTime: 0.18
-  smoothStopTime: 0.4
-  crouchHeight: 1
-  crouchCenter: 0.5
-  standHeight: 1.8
-  standCenter: 0.9
-  jumpHeight: 1
+  smoothMoveTime: 0.15
+  smoothStopTime: 0.3
   gravity: -9.81
   groundMask:
     serializedVersion: 2
@@ -3775,6 +3783,8 @@ MonoBehaviour:
   rightHandConstraint: {fileID: 5811117019452088475}
   leftHandRotationConstraint: {fileID: 8083383253356130869}
   rightHandRotationConstraint: {fileID: 5947722302771189889}
+  upperChestConstraint: {fileID: 485220015103280589}
+  headConstraint: {fileID: 3853842301568241512}
   weightHandsChangeSpeed: 5
 --- !u!114 &6357858350119136262
 MonoBehaviour:
@@ -3812,7 +3822,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8359663886984168038}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b2d8418b0b9634b1892b0268dd9c2743, type: 3}
   m_Name: 

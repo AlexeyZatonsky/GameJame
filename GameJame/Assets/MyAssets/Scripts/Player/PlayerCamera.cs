@@ -13,38 +13,75 @@ public class PlayerCamera : MonoBehaviour
 
     private float cameraPitch = 0f;
 
+    private Vector2 rotateInput;
+
+    private bool canRotate = true;
+
     private void Awake()
     {
-        HideCursor();
         FindPlayerHead();
         FindCameraRoot();
     }
 
     private void LateUpdate()
     {
-        if (playerHeadTransform == null) return;
-
+        HandleInput();
         UpdateCamPosAndRot();
+    }
+    
+    private void Start()
+    {
+        GameManager.Instance.OnPlayerStateChanged += ChangeCanRotate;
+    }   
+
+    private void OnDisable()
+    {
+        GameManager.Instance.OnPlayerStateChanged -= ChangeCanRotate;
+    }
+
+    private void ChangeCanRotate(PlayerState state)
+    {
+        if (state == PlayerState.Action)
+        {
+            canRotate = true;
+        }
+        else
+        {
+            canRotate = false;
+        }
+    }
+
+    private void HandleInput()
+    {
+        if (canRotate)
+        {
+            rotateInput = InputManager.Instance.GetCameraRotateInput();
+        }
+        else
+        {
+            rotateInput = Vector2.zero;
+        }
     }
 
     private void UpdateCamPosAndRot()
     {
-        cameraRootTransform.position = playerHeadTransform.position;
+        if (canRotate)
+        {
+            cameraRootTransform.position = playerHeadTransform.position;
 
-        Vector2 rotateInput = InputManager.Instance.GetCameraRotateInput();
-        float mouseX = rotateInput.x * sensitivity * 0.25f;
-        float mouseY = rotateInput.y * sensitivity * 0.25f;
+            float mouseX = rotateInput.x * sensitivity * 0.25f;
+            float mouseY = rotateInput.y * sensitivity * 0.25f;
 
-        cameraPitch -= mouseY;
-        cameraPitch = Mathf.Clamp(cameraPitch, minPitch, maxPitch);
-        transform.parent.Rotate(Vector3.up * mouseX);
-        cameraRootTransform.localRotation = Quaternion.Euler(cameraPitch, 0f, 0f);
-    }
-
-    private void HideCursor()
-    {
-        Cursor.visible = false;
-        Cursor.lockState = CursorLockMode.Locked;
+            cameraPitch -= mouseY;
+            cameraPitch = Mathf.Clamp(cameraPitch, minPitch, maxPitch);
+            transform.parent.Rotate(Vector3.up * mouseX);
+            cameraRootTransform.localRotation = Quaternion.Euler(cameraPitch, 0f, 0f);
+        }
+        else
+        {
+            cameraRootTransform.position = playerHeadTransform.position;
+            cameraRootTransform.rotation = playerHeadTransform.rotation;
+        }
     }
 
     private void FindCameraRoot()
