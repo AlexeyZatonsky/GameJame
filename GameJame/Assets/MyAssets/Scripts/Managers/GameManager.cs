@@ -236,6 +236,7 @@ public class GameManager : MonoBehaviour
     {
         yield return new WaitForSeconds(delayBeforeMainMenu);
         yield return StartCoroutine(goBedUI.FadeBlackScreen(true, blackScreenSpeedFadeBackMenu));
+        CursorController.Instance.ShowCursor();
 
         UnityEngine.SceneManagement.SceneManager.LoadScene("MainMenu");
     }

@@ -7,13 +7,9 @@ public class EventObjectManager : SingletonManager<EventObjectManager>
     [SerializeField] private float ChanceToFixed=50;
     [SerializeField] private int fixedCount = 0;
     
-    public int FixedCount => fixedCount;
 
     void Start()
     {
-        //OnTimerStop
-        TimeManager.Instance.OnTimerStop += CheckFixed;
-
         //FindEventObj
         eventObjectsList = new List<EventObject>(FindObjectsOfType<EventObject>());
         foreach (var eventObject in eventObjectsList)
@@ -31,18 +27,18 @@ public class EventObjectManager : SingletonManager<EventObjectManager>
         }
     }
 
-   public void CheckFixed()
+    /*
+    public void CheckFixed()
     {
         if (eventObjectsList.Count == fixedCount )
         {
             Debug.Log("Win");
             Debug.Log($"ListCount:{eventObjectsList.Count}, FixedCount:{fixedCount}");
         }
-        else if (eventObjectsList.Count - fixedCount <=2 && TimeManager.Instance.HaveChance)
+        else if (eventObjectsList.Count - fixedCount <=2)
         {
             Debug.Log("Have a Chance");
             Debug.Log($"ListCount:{eventObjectsList.Count}, FixedCount:{fixedCount}");
-            TimeManager.Instance.AddTime(10);
         }
         else
         {
@@ -50,6 +46,9 @@ public class EventObjectManager : SingletonManager<EventObjectManager>
             Debug.Log($"ListCount:{eventObjectsList.Count}, FixedCount:{fixedCount}");
         }
     }
+    */
 
+    public List<EventObject> EventObjectsList => eventObjectsList;
+    public int FixedCount => fixedCount;
     public void FixedCountPlus() { fixedCount++; }
 }

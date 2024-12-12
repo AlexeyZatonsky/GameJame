@@ -12,7 +12,7 @@ public class CursorController : MonoBehaviour
             return;
         }
         Instance = this;
-        DontDestroyOnLoad(gameObject);
+        //DontDestroyOnLoad(gameObject);
 
         HideCursor();
     }
