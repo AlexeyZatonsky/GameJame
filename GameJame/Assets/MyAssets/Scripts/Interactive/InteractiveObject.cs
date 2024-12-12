@@ -8,7 +8,7 @@ public class InteractiveObject : MonoBehaviour, IInteractive
     [SerializeField] protected IntractiveObjectData intractiveObjectData;
     //[SerializeField] private List<LootData> lootDatasList = new List<LootData>();
 
-    [SerializeField] protected bool canInteract = false;
+    [SerializeField] protected bool canInteract = true;
 
     public virtual void Interact()
     {

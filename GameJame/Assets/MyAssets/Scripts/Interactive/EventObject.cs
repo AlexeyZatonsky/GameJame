@@ -42,7 +42,7 @@ public class EventObject : InteractiveObject
 
             if (isCanFixOfLoot && isCanFixOfFirstEvents)
             {
-                ChangeState();
+                ChangeStateFix();
                 
             }
             
@@ -94,12 +94,20 @@ public class EventObject : InteractiveObject
         return true;
     }
 
-    public void ChangeState()
+    public void ChangeStateFix()
     {
         eventData.SetEventObjState(EventObjState.Fixed);
         canInteract = false;
         ChangeView();
         Debug.Log("Fixed");
+    }
+
+    public void ChangeStateNeedFix()
+    {
+        eventData.SetEventObjState(EventObjState.NeedToFix);
+        canInteract = true;
+        ChangeView();
+        Debug.Log("NeedFix");
     }
 
     public void ChangeView()

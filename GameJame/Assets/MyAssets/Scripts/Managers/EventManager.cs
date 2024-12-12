@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 
@@ -31,17 +32,23 @@ public class EnableEventManager : SingletonManager<EnableEventManager>
 
     [SerializeField] private GameObject eventsPull;
 
+    /// <summary>Актуальные объекты для вывода в UI</summary>
     [SerializeField] private List<EventObject> eventsPush = new List<EventObject>();
 
     [SerializeField] private float FixedEventChance = 0.5f;
-    
+
+
+
     
 
-private void Awake()
+    private void Awake()
     {
         events.AddRange(eventsPull.GetComponentsInChildren<EventObject>());
         setRandomStateToEvents();
     }
+
+    
+
 
     private void setRandomStateToEvents()
     {
@@ -49,8 +56,7 @@ private void Awake()
         {
             if (eventObject.GetEventData().GetDatasEventsToFixFirst.Count > 0)
             {
-                eventObject.GetEventData().SetEventObjState(EventObjState.NeedToFix);
-                eventObject.ChangeView();
+                setOriginState(eventObject, EventObjState.NeedToFix);
                 continue;
             }
 
@@ -58,11 +64,24 @@ private void Awake()
             Debug.LogError("чиcло = " + randomValue + " для " + eventObject.GetEventData().GetEventName);
             
             if (randomValue <= FixedEventChance)
-                eventObject.GetEventData().SetEventObjState(EventObjState.Fixed);
+                setOriginState(eventObject, EventObjState.Fixed);
             else
-                eventObject.GetEventData().SetEventObjState(EventObjState.NeedToFix);
-            
-            eventObject.ChangeView();
+                setOriginState(eventObject, EventObjState.NeedToFix);
         }
+    }
+    
+    private void setOriginState(EventObject eventObject, EventObjState state)
+    {
+        if (state == EventObjState.Fixed)
+        {
+            eventObject.ChangeStateFix();
+            events.Remove(eventObject);
+            eventObject.ChangeView();
+            return;
+        }
+        
+        eventObject.ChangeStateNeedFix();
+        eventObject.ChangeView();
+        
     }
 }
