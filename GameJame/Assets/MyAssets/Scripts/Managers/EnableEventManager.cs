@@ -28,7 +28,7 @@ using UnityEngine;
 public class EnableEventManager : SingletonManager<EnableEventManager>
 {
     ///<summary> основные евенты </summary>
-    [SerializeField] private List<EventObject> events = new List<EventObject>();
+    [SerializeField] private List<EventObject> events;
 
     [SerializeField] private GameObject eventsPull;
     
@@ -41,7 +41,11 @@ public class EnableEventManager : SingletonManager<EnableEventManager>
 
     private void Awake()
     {
+        Debug.LogError("EventManager: Awake");
         events.AddRange(eventsPull.GetComponentsInChildren<EventObject>());
+        
+        
+        Debug.LogError("EventManager: Awake after events.AddRange");
         setRandomStateToEvents();
     }
 
@@ -50,8 +54,13 @@ public class EnableEventManager : SingletonManager<EnableEventManager>
 
     private void setRandomStateToEvents()
     {
+        Debug.LogError("EventManager: setRandomStateToEvents");
+        
+        if (events.Count < 1) Debug.LogError("EventManager: setRandomStateToEvents: events.Count < 1");
+        
         foreach (EventObject eventObject in events)
         {
+            Debug.LogError("EnableEventManager : SetRandomStateToEvents : Foreach");
             if (eventObject.GetEventData().GetDatasEventsToFixFirst.Count > 0)
             {
                 setOriginState(eventObject, EventObjState.NeedToFix);
@@ -70,16 +79,15 @@ public class EnableEventManager : SingletonManager<EnableEventManager>
     
     private void setOriginState(EventObject eventObject, EventObjState state)
     {
+        Debug.LogError("EventManager: setOriginState");
         if (state == EventObjState.Fixed)
         {
             eventObject.ChangeStateFix();
             events.Remove(eventObject);
-            eventObject.ChangeView();
             return;
         }
         
         eventObject.ChangeStateNeedFix();
-        eventObject.ChangeView();
         
     }
 }

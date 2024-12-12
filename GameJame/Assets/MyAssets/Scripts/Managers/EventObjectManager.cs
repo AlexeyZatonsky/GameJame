@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class EventObjectManager : SingletonManager<EventObjectManager>
 {
-    [SerializeField] private List<EventObject> eventObjectsList;
+    [SerializeField] private List<EventObject> eventObjectsList = new List<EventObject>();
     [SerializeField] private float ChanceToFixed=50;
     [SerializeField] private int fixedCount = 0;
     

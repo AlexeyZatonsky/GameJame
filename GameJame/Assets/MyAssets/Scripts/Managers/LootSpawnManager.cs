@@ -10,20 +10,23 @@ namespace MyAssets.Managers
         
         
         [SerializeField] private List<LootData> objectsToSpawn = new List<LootData>();
-        
-        
+
+
         private void Start()
         {
+            Debug.LogError("LootSpawnManager Awake");
             initializeLootDataToSpawn();
             spawnLoot();
         }
 
         private void initializeLootDataToSpawn()
         {
+            Debug.LogError("LootSpawnManager Initializing");
             List<EventObject> _events =  EnableEventManager.Instance.GetEvents;
-            foreach (EventObject _event in _events)
+            
+            foreach(EventObject _event in _events)
             {
-                var lootData = _event.GetEventData().GetDataLootToFix;
+                LootData lootData = _event.GetEventData().GetDataLootToFix;
 
                 if (lootData != null)
                 {
@@ -34,16 +37,19 @@ namespace MyAssets.Managers
 
         private void spawnLoot()
         {
+            Debug.LogError("LootSpawnManager Spawning");
             spawnPlaces.AddRange(spawnPlacesPull.GetComponentsInChildren<Transform>());
 
             foreach (LootData _lootData in objectsToSpawn)
             {
+                Debug.LogError("Foreach in spawn Places pull");
                 int index = Random.Range(0, spawnPlaces.Count - 1);
                 
                 Transform spawnPlace = spawnPlaces[index];
                 spawnPlaces.RemoveAt(index);
                 
                 Instantiate(_lootData.GetLootPrefab, spawnPlace);
+                Debug.LogError("LootSpawnManager Spawning instantiate after");
             }
         }
     }

@@ -112,17 +112,17 @@ public class EventObject : InteractiveObject
 
     public void ChangeView()
     {
-        if (objectRenderer != null)
-        {
+        
+        
             if (eventData.GetEventObjState == EventObjState.Fixed)
             {
                 objectRenderer.material.color = Color.green;
+                return;
             }
-            else
-            {
-                objectRenderer.material.color = Color.red;
-            }
-        }
+
+            objectRenderer.material.color = Color.red;
+            
+        
 
     }
 

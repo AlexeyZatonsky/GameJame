@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 383804d743010ba44816113db545bc9a, type: 3}
   m_Name: Event1
   m_EditorClassIdentifier: 
-  eventName: "\u0415\u0432\u0435\u043D\u04421"
+  eventName: Even1
   eventPositionInHolder: {x: 0, y: 0, z: 0}
   eventRotationInHolder: {x: 0, y: 0, z: 0}
   interactObjectPrefab: {fileID: 0}
@@ -20,5 +20,5 @@ MonoBehaviour:
   cantInteractSound: {fileID: 0}
   interactObjectAnimator: {fileID: 0}
   datasEventsToFixFirst: []
-  eventObjState: 1
+  eventObjState: 0
   dataLootToFix: {fileID: 11400000, guid: 8fef7156db079064fa8fa627a0998f36, type: 2}
