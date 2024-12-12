@@ -15,6 +15,7 @@ namespace MyAssets.Managers
         private void Start()
         {
             initializeLootDataToSpawn();
+            spawnLoot();
         }
 
         private void initializeLootDataToSpawn()
@@ -37,7 +38,12 @@ namespace MyAssets.Managers
 
             foreach (LootData _lootData in objectsToSpawn)
             {
+                int index = Random.Range(0, spawnPlaces.Count - 1);
                 
+                Transform spawnPlace = spawnPlaces[index];
+                spawnPlaces.RemoveAt(index);
+                
+                Instantiate(_lootData.GetLootPrefab, spawnPlace);
             }
         }
     }
