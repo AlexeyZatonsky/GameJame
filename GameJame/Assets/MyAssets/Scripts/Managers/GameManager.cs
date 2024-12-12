@@ -41,6 +41,7 @@ public class GameManager : MonoBehaviour
 
     [Header("GameState Objects")]
     [SerializeField] private Camera winCamera;
+    [SerializeField] private Transform playerLosePosition;
 
     public event Action<GameState> OnGameStateChanged;
     public event Action<PlayerState> OnPlayerStateChanged;
@@ -73,6 +74,8 @@ public class GameManager : MonoBehaviour
     {
         OnGameStateChanged?.Invoke(currentState);
         OnPlayerStateChanged?.Invoke(playerState);
+
+        SetGameState();
     }
 
     private void OnEnable()
@@ -90,11 +93,11 @@ public class GameManager : MonoBehaviour
         switch (currentState)
         {
             case GameState.StartCutscene:
-                UpdateGameState(GameState.FirstTimer, PlayerState.Action);
+                StartCoroutine(HandleStartCutscene());
                 break;
             
             case GameState.FirstTimer:
-                UpdateGameState(GameState.InBed, PlayerState.NoAction);
+                UpdateGameState(GameState.FirstTimer, PlayerState.NoAction);
                 StartCoroutine(HandleBedTransition());
                 break;
             
@@ -114,6 +117,15 @@ public class GameManager : MonoBehaviour
         OnPlayerStateChanged?.Invoke(playerState);
     }
 
+    private IEnumerator HandleStartCutscene()
+    {
+        goBedUI.SetBlackScreenInstant(true);
+        timeManager.SetTimerUI(false);
+        yield return StartCoroutine(goBedUI.FadeBlackScreen(false, blackScreenSpeedFade));
+        UpdateGameState(GameState.FirstTimer, PlayerState.Action);
+        timeManager.SetTimerUI(true);
+    }
+
     private IEnumerator HandleBedTransition()
     {
         yield return StartCoroutine(goBedUI.FadeBlackScreen(true, blackScreenSpeedFade));
@@ -121,7 +133,7 @@ public class GameManager : MonoBehaviour
         timeManager.SetTimerUI(false);
         goBedUI.ShowDot(false);
         playerInfo.GetComponent<PlayerInventory>().DropItem(true, 2f);
-
+        UpdateGameState(GameState.InBed, PlayerState.NoAction);
         PlayerSleeping();
 
         SubtitlesManager.Instance.PlayDialogue("D_Bed");
@@ -170,6 +182,17 @@ public class GameManager : MonoBehaviour
         playerInfo.GetComponent<Animator>().applyRootMotion = false;
         playerInfo.GetComponent<CharacterController>().enabled = true;
         playerInfo.GetComponent<PlayerRigController>().SetHeadUpperChestWeight(1f);
+    }
+
+    private void PlayerLose()
+    {
+        playerInfo.transform.position = playerLosePosition.position;
+        playerInfo.transform.rotation = playerLosePosition.rotation;
+
+        playerInfo.GetComponent<CharacterController>().enabled = false;
+        playerInfo.GetComponent<Animator>().SetBool("IS_Lose", true);
+        playerInfo.GetComponent<Animator>().applyRootMotion = true;
+        playerInfo.GetComponent<PlayerRigController>().SetHeadUpperChestWeight(0f);
     }
 
     public void CheckButtonPressed()
@@ -230,6 +253,8 @@ public class GameManager : MonoBehaviour
     {
         playerState = PlayerState.NoAction;
         OnPlayerStateChanged?.Invoke(playerState);
+
+        PlayerLose();
         
         // TODO: Показать экран поражения. Перенос персонажа в зал с камином, поворот назад, а там дед ебалай.
     }

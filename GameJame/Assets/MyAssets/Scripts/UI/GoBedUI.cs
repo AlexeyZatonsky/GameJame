@@ -160,6 +160,12 @@ public class GoBedUI : MonoBehaviour
         }
     }
 
+    public void SetBlackScreenInstant(bool isBlack)
+    {
+        blackPanel.gameObject.SetActive(true);
+        blackPanel.color = new Color(0, 0, 0, isBlack ? 1f : 0f);
+    }
+
     public void ShowDot(bool isActive)
     {
         dot.SetActive(isActive);

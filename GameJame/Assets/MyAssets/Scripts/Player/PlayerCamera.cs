@@ -16,6 +16,7 @@ public class PlayerCamera : MonoBehaviour
     private Vector2 rotateInput;
 
     private bool canRotate = true;
+    private bool canFollowHead = false;
 
     private void Awake()
     {
@@ -32,11 +33,13 @@ public class PlayerCamera : MonoBehaviour
     private void Start()
     {
         GameManager.Instance.OnPlayerStateChanged += ChangeCanRotate;
+        GameManager.Instance.OnGameStateChanged += CanFollowHead;
     }   
 
     private void OnDisable()
     {
         GameManager.Instance.OnPlayerStateChanged -= ChangeCanRotate;
+        GameManager.Instance.OnGameStateChanged -= CanFollowHead;
     }
 
     private void ChangeCanRotate(PlayerState state)
@@ -48,6 +51,18 @@ public class PlayerCamera : MonoBehaviour
         else
         {
             canRotate = false;
+        }
+    }
+
+    private void CanFollowHead(GameState state)
+    {
+        if (state == GameState.InBed)
+        {
+            canFollowHead = true;
+        }
+        else
+        {
+            canFollowHead = false;
         }
     }
 
@@ -77,7 +92,7 @@ public class PlayerCamera : MonoBehaviour
             transform.parent.Rotate(Vector3.up * mouseX);
             cameraRootTransform.localRotation = Quaternion.Euler(cameraPitch, 0f, 0f);
         }
-        else
+        else if (canFollowHead)
         {
             cameraRootTransform.position = playerHeadTransform.position;
             cameraRootTransform.rotation = playerHeadTransform.rotation;

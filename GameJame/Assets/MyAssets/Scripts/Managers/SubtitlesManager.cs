@@ -11,6 +11,8 @@ public class SubtitlesManager : MonoBehaviour
     [Header("Subtitles")]
     [SerializeField] private GameObject subPanel;
     [SerializeField] private TMP_Text subText;
+    [SerializeField] private float horizontalPadding = 40f;
+    [SerializeField] private float verticalPadding = 20f;
     
     [Header("Animation Settings")]
     [SerializeField] private float fadeSpeed = 5f;
@@ -39,6 +41,7 @@ public class SubtitlesManager : MonoBehaviour
         panelImage = subPanel.GetComponent<Image>();
         originalPanelAlpha = panelImage.color.a;
         originalTextAlpha = subText.color.a;
+        subText.text = "";
     }
 
     private void ShowDialogue(DialogueData dialogue)
@@ -59,17 +62,28 @@ public class SubtitlesManager : MonoBehaviour
         foreach (var line in dialogue.dialogueLines)
         {
             SetAlpha(0f);
+            subText.text = line.text;
             subPanel.SetActive(true);
+            
+            RectTransform panelRect = subPanel.GetComponent<RectTransform>();
+            RectTransform textRect = subText.GetComponent<RectTransform>();
+            
+            yield return null;
+            
+            Vector2 textSize = subText.GetPreferredValues();
+            panelRect.sizeDelta = new Vector2(
+                textSize.x + horizontalPadding,
+                textSize.y + verticalPadding
+            );
             
             yield return FadeElements(true);
             
-            subText.text = line.text;
             yield return new WaitForSeconds(line.displayTime);
             
             yield return FadeElements(false);
             
-            subText.text = "";
             subPanel.SetActive(false);
+            subText.text = "";
             
             yield return new WaitForSeconds(line.delayBeforeNext);
         }
