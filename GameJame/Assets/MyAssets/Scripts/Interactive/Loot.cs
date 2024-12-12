@@ -4,6 +4,8 @@ using UnityEngine;
 public class Loot : MonoBehaviour, IInteractive
 {
     [SerializeField] private LootData lootData;
+    public void SetLootData(LootData lootData) => this.lootData = lootData;
+    
     
     public void Interact()
     {

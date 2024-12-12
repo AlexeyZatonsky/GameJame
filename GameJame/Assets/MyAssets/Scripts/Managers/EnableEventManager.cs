@@ -31,13 +31,11 @@ public class EnableEventManager : SingletonManager<EnableEventManager>
     [SerializeField] private List<EventObject> events = new List<EventObject>();
 
     [SerializeField] private GameObject eventsPull;
-
-    /// <summary>Актуальные объекты для вывода в UI</summary>
-    [SerializeField] private List<EventObject> eventsPush = new List<EventObject>();
+    
 
     [SerializeField] private float FixedEventChance = 0.5f;
 
-
+    public List<EventObject> GetEvents => events;
 
     
 
