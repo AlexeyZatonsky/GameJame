@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 
 
@@ -34,13 +35,28 @@ public class EventObject : InteractiveObject
         {
             // TODO: Проверка лута в руках из PlayerInventory.GetCurrentItem
 
-            if (playerInventory.GetCurrentItem is not null)
-            {
-                Debug.LogError(playerInventory.GetCurrentItem.ToString());
-            }
+          
+            LootData currentLootData = playerInventory.GetCurrentItem?.GetLootData;
+        
+            List<EventData> eventsToFixFirst = eventData.GetDatasEventsToFixFirst;
+
+            if (eventsToFixFirst.Count == 0)
+                ChangeState();
             
-            EventObjectManager.Instance.FixedCountPlus();
-            ChangeState();
+            foreach (EventData eventNeedToFix in eventsToFixFirst)
+            {
+                if (eventNeedToFix.GetEventObjState == EventObjState.NeedToFix)
+                {
+                    Debug.LogError(eventNeedToFix.name + " is not fixing ");
+                }
+                else
+                {
+                    ChangeState();
+                }
+            }
+
+            
+            
 
         }
 
@@ -48,6 +64,12 @@ public class EventObject : InteractiveObject
 
     public void ChangeState()
     {
+            /*if (eventNeedToFix.GetEventObjState == EventObjState.NeedToFix)
+            {
+                Debug.LogError(eventNeedToFix.name + " is not fixing ");
+                return;
+            }*/
+        
         eventData.SetEventObjState(EventObjState.Fixed);
         canInteract = false;
         ChangeView();

@@ -29,7 +29,7 @@ public class EventData : ScriptableObject
     
     ///<summary>мини евенты которые должны быть выполнены до основного</summary>>
     [SerializeField] private List<EventData> datasEventsToFixFirst;
-    [SerializeField] private EventObjState eventObjState = EventObjState.NeedToFix;
+    [SerializeField] private EventObjState eventObjState;
     
     [SerializeField] private LootData dataLootToFix;
     
@@ -43,6 +43,8 @@ public class EventData : ScriptableObject
     public Animator GetInteractObjectAnimator => interactObjectAnimator;
     public List<EventData> GetDatasEventsToFixFirst => datasEventsToFixFirst;
     public EventObjState GetEventObjState => eventObjState;
+    
+    public LootData GetDataLootToFix => dataLootToFix;
     
     public void SetEventObjState(EventObjState value) => eventObjState = value;
     
