@@ -20,5 +20,5 @@ MonoBehaviour:
   cantInteractSound: {fileID: 0}
   interactObjectAnimator: {fileID: 0}
   datasEventsToFixFirst: []
-  eventObjState: 0
-  dataLootToFix: {fileID: 0}
+  eventObjState: 1
+  dataLootToFix: {fileID: 11400000, guid: 8fef7156db079064fa8fa627a0998f36, type: 2}

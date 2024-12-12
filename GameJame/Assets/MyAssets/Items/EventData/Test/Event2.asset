@@ -12,13 +12,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 383804d743010ba44816113db545bc9a, type: 3}
   m_Name: Event2
   m_EditorClassIdentifier: 
-  eventName: 
+  eventName: event3
   eventPositionInHolder: {x: 0, y: 0, z: 0}
   eventRotationInHolder: {x: 0, y: 0, z: 0}
   interactObjectPrefab: {fileID: 0}
   interactObjectSound: {fileID: 0}
   cantInteractSound: {fileID: 0}
   interactObjectAnimator: {fileID: 0}
-  datasEventsToFixFirst: []
-  eventObjState: 0
+  datasEventsToFixFirst:
+  - {fileID: 11400000, guid: c827d5c4fde47154cbccf2212e57990b, type: 2}
+  eventObjState: 1
   dataLootToFix: {fileID: 0}
