@@ -13,13 +13,12 @@ public class EventObject : InteractiveObject
     [SerializeField] private Renderer objectRenderer;
     
 
+    public EventData GetEventData() => eventData;
 
     private void Awake()
     {
         objectRenderer = GetComponent<Renderer>();
         ChangeView();
-        
-        eventData.SetEventObjState(EventObjState.NeedToFix);
         
         playerInventory = FindObjectOfType<PlayerInventory>();
     }
@@ -38,11 +37,14 @@ public class EventObject : InteractiveObject
             LootData currentLootData = playerInventory.GetCurrentItem?.GetLootData;
             List<EventData> eventsToFixFirst = eventData.GetDatasEventsToFixFirst;
 
-            bool isCanFixOfLoot = _canFixOfLoot(NeedLootData, currentLootData);
             bool isCanFixOfFirstEvents = _canFixOfMiniEvents(eventsToFixFirst);
+            bool isCanFixOfLoot = _canFixOfLoot(NeedLootData, currentLootData, isCanFixOfFirstEvents);
 
             if (isCanFixOfLoot && isCanFixOfFirstEvents)
+            {
                 ChangeState();
+                
+            }
             
         }
 
@@ -77,7 +79,7 @@ public class EventObject : InteractiveObject
     /// <param name="needLootData">Нужный лут для починки</param>
     /// <param name="inInventoryLootData">Лут в руках</param>
     /// <returns>Bool</returns>
-    private bool _canFixOfLoot(LootData needLootData, LootData inInventoryLootData)
+    private bool _canFixOfLoot(LootData needLootData, LootData inInventoryLootData, bool canFixOfEvents)
     {
         if(needLootData == null) return true;
         
@@ -87,7 +89,8 @@ public class EventObject : InteractiveObject
             return false;
         }
         
-        playerInventory.DestroyItem();
+        if (canFixOfEvents)
+            playerInventory.DestroyItem();
         return true;
     }
 

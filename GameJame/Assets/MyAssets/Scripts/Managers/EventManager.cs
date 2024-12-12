@@ -18,23 +18,51 @@ using UnityEngine;
 */
 
 /// <summary>
-              /// Это маленькие и ключевые эвенты которые нужно закрыть
-              /// маленькие евенты то, что нужно выполнить пользователю
-              /// для выполнения основного евента
-              /// Синглтончик 
-              /// 
+/// Это маленькие и ключевые эвенты которые нужно закрыть
+/// маленькие евенты то, что нужно выполнить пользователю
+/// для выполнения основного евента
+/// Синглтончик 
+/// 
 /// </summary>
-public class EventManager : SingletonManager<EventManager>
+public class EnableEventManager : SingletonManager<EnableEventManager>
 {
     ///<summary> основные евенты </summary>
-    [SerializeField] private List<Event> events = new List<Event>(); 
+    [SerializeField] private List<EventObject> events = new List<EventObject>();
+
+    [SerializeField] private GameObject eventsPull;
+
+    [SerializeField] private List<EventObject> eventsPush = new List<EventObject>();
+
+    [SerializeField] private float FixedEventChance = 0.5f;
+    
     
 
-    
-
-
-    private void Awake()
+private void Awake()
     {
-        
+        events.AddRange(eventsPull.GetComponentsInChildren<EventObject>());
+        setRandomStateToEvents();
+    }
+
+    private void setRandomStateToEvents()
+    {
+        foreach (EventObject eventObject in events)
+        {
+            if (eventObject.GetEventData().GetDatasEventsToFixFirst.Count > 0)
+            {
+                eventObject.GetEventData().SetEventObjState(EventObjState.NeedToFix);
+                eventObject.ChangeView();
+                continue;
+            }
+
+            float randomValue = Random.Range(0f, 1f);
+            Debug.LogError("чиcло = " + randomValue + " для " + eventObject.GetEventData().GetEventName);
+            
+            if (randomValue <= FixedEventChance)
+                eventObject.GetEventData().SetEventObjState(EventObjState.Fixed);
+            else
+                eventObject.GetEventData().SetEventObjState(EventObjState.NeedToFix);
+            
+            eventObject.ChangeView();
+        }
     }
 }

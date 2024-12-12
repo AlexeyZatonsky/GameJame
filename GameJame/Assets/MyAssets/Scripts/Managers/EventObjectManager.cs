@@ -22,7 +22,7 @@ public class EventObjectManager : SingletonManager<EventObjectManager>
             //Fix with Chance
             if (randomValue < ChanceToFixed)
             {
-                eventObject.ChangeState();
+                //eventObject.ChangeState();
                 fixedCount++;
                 Debug.Log($"EventObject name: {eventObject.name}, fixed");
 
