@@ -11,7 +11,10 @@ public class EventObject : InteractiveObject
     [SerializeField] private PlayerInventory playerInventory;
     
     [SerializeField] private Renderer objectRenderer;
-    
+
+    [SerializeField] private bool _isdoor=false;
+    [SerializeField] private ObjMove objMove;
+
 
     public EventData GetEventData() => eventData;
 
@@ -28,6 +31,11 @@ public class EventObject : InteractiveObject
         base.Interact();
         if (eventData.GetEventObjState == EventObjState.Fixed)
         {
+            Debug.LogError("Fixed");
+            if (_isdoor)
+            {
+                objMove.Move();
+            }
             return;
         }
         else
