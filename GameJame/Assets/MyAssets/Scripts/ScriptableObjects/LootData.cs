@@ -15,9 +15,6 @@ public class LootData : ScriptableObject
     [Header("Links")]
     [SerializeField] private GameObject lootPrefab; 
     
-    [SerializeField] private AudioClip lootSoundTake; 
-    [SerializeField] private AudioClip lootDestroySound;
-    
     [SerializeField] private Animator lootAnimator;
     [SerializeField] private Animator lootDestroAnimator;
     
@@ -30,8 +27,6 @@ public class LootData : ScriptableObject
     
     public GameObject GetLootPrefab => lootPrefab;
     
-    public AudioClip GetLootSoundTake => lootSoundTake;
-    public AudioClip GetLootDestroySound => lootDestroySound;
     
     public Animator GetLootAnimator => lootAnimator;
     public Animator GetLootDestroAnimator => lootDestroAnimator;

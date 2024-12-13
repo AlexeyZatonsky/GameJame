@@ -54,6 +54,8 @@ public class PlayerInventory : MonoBehaviour
         loot.transform.SetParent(itemHolder.transform);
         loot.transform.localPosition = loot.GetLootData.GetLootPositionInHolder;
         loot.transform.localRotation = Quaternion.Euler(loot.GetLootData.GetLootRotationInHolder);
+        SoundManager.Instance.PlaySound("Pickup");
+        
     }
 
     public void DropItem(bool useForce, float throwForce)

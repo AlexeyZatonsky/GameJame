@@ -42,10 +42,12 @@ public class EventObject : InteractiveObject
 
             if (isCanFixOfLoot && isCanFixOfFirstEvents)
             {
+                SoundManager.Instance.PlaySound(eventData.GetInteractObjectSound);
                 ChangeStateFix();
-                
+                return;
             }
             
+            SoundManager.Instance.PlaySound(eventData.GetCantInteractSound);
         }
 
     }

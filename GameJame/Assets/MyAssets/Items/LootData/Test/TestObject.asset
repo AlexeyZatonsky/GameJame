@@ -20,7 +20,7 @@ MonoBehaviour:
   lootPositionInHolder: {x: 0, y: 0, z: 0}
   lootRotationInHolder: {x: 0, y: 0, z: 0}
   lootPrefab: {fileID: 3634030028674446944, guid: 2afdc08754a89ac4ea9d546941e0ddfa, type: 3}
-  lootSoundTake: {fileID: 0}
+  lootSoundTake: {fileID: 8300000, guid: ba845bf905d19ee4ab788a87b2207d70, type: 3}
   lootDestroySound: {fileID: 0}
   lootAnimator: {fileID: 0}
   lootDestroAnimator: {fileID: 0}

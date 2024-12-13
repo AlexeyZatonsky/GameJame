@@ -23,8 +23,8 @@ public class EventData : ScriptableObject
     
     [Header("Links")]
     [SerializeField] private GameObject interactObjectPrefab;
-    [SerializeField] private AudioClip interactObjectSound;
-    [SerializeField] private AudioClip cantInteractSound; // если с объектом невозможно взаимодействовать
+    [SerializeField] private String interactObjectSound;
+    [SerializeField] private String cantInteractSound; // если с объектом невозможно взаимодействовать
     [SerializeField] private Animator interactObjectAnimator;
     
     ///<summary>мини евенты которые должны быть выполнены до основного</summary>>
@@ -38,8 +38,8 @@ public class EventData : ScriptableObject
     public Vector3 GetEventRotationInHolder => eventRotationInHolder;
     
     public GameObject GetInteractObjectPrefab => interactObjectPrefab;
-    public AudioClip GetInteractObjectSound => interactObjectSound;
-    public AudioClip GetCantInteractSound => cantInteractSound;
+    public String   GetInteractObjectSound => interactObjectSound;
+    public String   GetCantInteractSound => cantInteractSound;
     public Animator GetInteractObjectAnimator => interactObjectAnimator;
     public List<EventData> GetDatasEventsToFixFirst => datasEventsToFixFirst;
     public EventObjState GetEventObjState => eventObjState;
