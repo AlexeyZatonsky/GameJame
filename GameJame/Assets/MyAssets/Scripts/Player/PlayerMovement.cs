@@ -36,6 +36,12 @@ public class PlayerMovement : MonoBehaviour
     private bool isRunning = false;
     private bool isGrounded = true;
 
+
+    //Sound
+    //private bool stepSoundPlayed = false;
+    private float lastStepTime = 0f; // Время последнего звука шага
+    private float stepCooldown = 0.15f; // Минимальное время между звуками
+
     private void Awake()
     {
         FindAllNeedComponents();
@@ -113,6 +119,7 @@ public class PlayerMovement : MonoBehaviour
             right.y = 0;
             right.Normalize();
 
+
             Vector3 adjustedDirection = (forward * targetDirection.z + right * targetDirection.x).normalized;
 
             currentDirection = Vector3.Lerp(currentDirection, adjustedDirection, Time.deltaTime / smoothMoveTime);
@@ -168,6 +175,56 @@ public class PlayerMovement : MonoBehaviour
 
         animator.SetFloat("FB_Velocity", adjustedForwardBackwardSpeed, animationSmoothTime, Time.deltaTime);
         animator.SetFloat("LR_Velocity", adjustedLeftRightSpeed, animationSmoothTime, Time.deltaTime);
+    }
+
+    private void PlayStepSound()
+    {
+        if (Time.time - lastStepTime >= stepCooldown)
+        {
+            SoundManager.Instance.PlaySound("Shag", 0);
+            lastStepTime = Time.time;
+        }
+        //AnimatorStateInfo stateInfo = animator.GetCurrentAnimatorStateInfo(0);
+
+        //// Проверяем текущую анимацию
+        //string[] stepAnimations = { "WalkForward", "WalkBackward", "WalkLeft", "WalkRight" };
+        //string[] runAnimations = { "RunForward", "RunBackward", "RunLeft", "RunRight" };
+
+        //bool isStepAnimation = false;
+        //bool isRunAnimation = false;
+
+        //foreach (string animationName in stepAnimations)
+        //{
+        //    if (stateInfo.IsName(animationName))
+        //    {
+        //        isStepAnimation = true;
+        //        Debug.LogError("SDS");
+        //        break;
+
+        //    }
+        //}
+
+        //foreach (string animationName in runAnimations)
+        //{
+        //    if (stateInfo.IsName(animationName))
+        //    {
+        //        isRunAnimation = true;
+        //        break;
+        //    }
+        //}
+
+        //// Проверяем, нужно ли воспроизводить звук
+        //if ((isStepAnimation || isRunAnimation) && !stepSoundPlayed && stateInfo.normalizedTime % 1 <= 0.5f)
+        //{
+        //    SoundManager.Instance.PlaySound("Shag", 0);
+        //    stepSoundPlayed = true;
+        //}
+
+        //// Сбрасываем флаг для следующего цикла
+        //if (stateInfo.normalizedTime % 1 > 0.5f)
+        //{
+        //    stepSoundPlayed = false;
+        //}
     }
 
     private void OnDrawGizmos()

@@ -43,6 +43,7 @@ public class PlayerInteraction : MonoBehaviour
             Loot loot = hit.collider.GetComponent<Loot>();
             if (loot != null)
             {
+                SoundManager.Instance.PlaySound("Povezlo");
                 playerInventory.PickupItem(loot);
                 return;
             }
@@ -51,6 +52,7 @@ public class PlayerInteraction : MonoBehaviour
             if (interactive != null)
             {
                 interactive.Interact();
+                SoundManager.Instance.PlaySound("Zachem");
             }
         }
     }
