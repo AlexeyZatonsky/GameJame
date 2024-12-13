@@ -95,9 +95,9 @@ Material:
     - _EnableRotation: 1
     - _Exposure: 0.5
     - _Float0: -0.21
-    - _FogFill: 0
-    - _FogHeight: 0.272
-    - _FogIntensity: 0.534
+    - _FogFill: 0.044
+    - _FogHeight: 0.539
+    - _FogIntensity: 0.592
     - _FogMessage: 0
     - _FogPosition: 0
     - _FogSmoothness: 0.5
