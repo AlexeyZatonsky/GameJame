@@ -10,6 +10,7 @@ public class PlayerCamera : MonoBehaviour
     [SerializeField] private float sensitivity = 100f;
     [SerializeField] private float minPitch = -30f;
     [SerializeField] private float maxPitch = 60f;
+    [SerializeField] private Vector3 rotationOffset;
 
     private float cameraPitch = 0f;
 
@@ -95,7 +96,7 @@ public class PlayerCamera : MonoBehaviour
         else if (canFollowHead)
         {
             cameraRootTransform.position = playerHeadTransform.position;
-            cameraRootTransform.rotation = playerHeadTransform.rotation;
+            cameraRootTransform.rotation = playerHeadTransform.rotation * Quaternion.Euler(rotationOffset);
         }
     }
 
