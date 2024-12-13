@@ -19,7 +19,6 @@ MonoBehaviour:
   interactObjectSound: ElectricalLock
   cantInteractSound: ElectricalLockCant
   interactObjectAnimator: {fileID: 0}
-  datasEventsToFixFirst:
-  - {fileID: 11400000, guid: 419d76e4899eef540ba00d6167bbf77f, type: 2}
-  eventObjState: 0
+  datasEventsToFixFirst: []
+  eventObjState: 1
   dataLootToFix: {fileID: 11400000, guid: ecca7fa5570c35e40b896ccab2cfd43a, type: 2}

@@ -29,6 +29,9 @@ public class EventObject : InteractiveObject
     public override void Interact()
     {
         base.Interact();
+        
+        
+        
         if (eventData.GetEventObjState == EventObjState.Fixed)
         {
             Debug.LogError("Fixed");

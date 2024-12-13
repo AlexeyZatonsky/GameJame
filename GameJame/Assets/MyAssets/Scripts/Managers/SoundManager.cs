@@ -11,16 +11,16 @@ public class SoundManager : SingletonManager<SoundManager>
         [Range(0f, 1f)] public float volume = 1f;
     }
 
-    public List<Sound> sounds = new List<Sound>(); // Список всех звуков
-    private Dictionary<string, Sound> soundDictionary = new Dictionary<string, Sound>(); // Быстрый доступ по имени
+    public List<Sound> sounds = new List<Sound>(); // пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ
+    private Dictionary<string, Sound> soundDictionary = new Dictionary<string, Sound>(); // пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅ
 
-    public List<AudioSource> audioSources = new List<AudioSource>(); // Список источников звука
+    public List<AudioSource> audioSources = new List<AudioSource>(); // пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ
 
     protected override void Awake()
     {
-        base.Awake(); // Вызов базового метода для работы SingletonManager
+        base.Awake(); // пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ SingletonManager
 
-        // Заполняем словарь звуков
+        // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ
         foreach (var sound in sounds)
         {
             if (!soundDictionary.ContainsKey(sound.name))
@@ -29,7 +29,7 @@ public class SoundManager : SingletonManager<SoundManager>
             }
         }
 
-        // Если список источников пуст, добавляем один AudioSource по умолчанию
+        // пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ, пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ AudioSource пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
         if (audioSources.Count == 0)
         {
             AudioSource defaultSource = gameObject.AddComponent<AudioSource>();
@@ -37,12 +37,12 @@ public class SoundManager : SingletonManager<SoundManager>
         }
     }
 
-    // Метод воспроизведения звука с выбором источника
+    // пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
     public void PlaySound(string name, int sourceIndex = 0)
     {
         if (sourceIndex < 0 || sourceIndex >= audioSources.Count)
         {
-            Debug.LogWarning($"Неверный индекс источника звука: {sourceIndex}");
+            Debug.LogWarning($"пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ: {sourceIndex}");
             return;
         }
 
@@ -52,16 +52,16 @@ public class SoundManager : SingletonManager<SoundManager>
         }
         else
         {
-            Debug.LogWarning($"Звук с именем {name} не найден!");
+            Debug.LogWarning($"пїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅ {name} пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ!");
         }
     }
 
-    // Метод воспроизведения фоновой музыки с выбором источника
+    // пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
     public void PlayMusic(string name, int sourceIndex = 0, bool loop = true)
     {
         if (sourceIndex < 0 || sourceIndex >= audioSources.Count)
         {
-            Debug.LogWarning($"Неверный индекс источника звука: {sourceIndex}");
+            Debug.LogWarning($"пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ: {sourceIndex}");
             return;
         }
 
@@ -75,16 +75,16 @@ public class SoundManager : SingletonManager<SoundManager>
         }
         else
         {
-            Debug.LogWarning($"Музыка с именем {name} не найдена!");
+            Debug.LogWarning($"пїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅ {name} пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ!");
         }
     }
 
-    // Метод остановки фоновой музыки для указанного источника
+    // пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
     public void StopMusic(int sourceIndex = 0)
     {
         if (sourceIndex < 0 || sourceIndex >= audioSources.Count)
         {
-            Debug.LogWarning($"Неверный индекс источника звука: {sourceIndex}");
+            Debug.LogWarning($"пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ: {sourceIndex}");
             return;
         }
 
