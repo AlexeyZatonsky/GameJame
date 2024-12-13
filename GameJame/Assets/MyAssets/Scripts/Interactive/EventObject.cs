@@ -48,6 +48,8 @@ public class EventObject : InteractiveObject
             }
             
             SoundManager.Instance.PlaySound(eventData.GetCantInteractSound);
+
+            
         }
 
     }
