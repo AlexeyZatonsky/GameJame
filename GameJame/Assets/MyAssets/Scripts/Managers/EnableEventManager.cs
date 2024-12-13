@@ -34,7 +34,7 @@ public class EnableEventManager : SingletonManager<EnableEventManager>
     [SerializeField] private GameObject eventsPull;
     
 
-    [SerializeField] private float FixedEventChance = 0.5f;
+    [SerializeField] private float FixedEventChance = 0.2f;
 
     public List<EventObject> GetEvents => events;
 
@@ -44,12 +44,10 @@ public class EnableEventManager : SingletonManager<EnableEventManager>
     {
         base.Awake();
 
-        Debug.LogError("EventManager: Awake");
         EventObject[] local_events = GetComponentsInChildren<EventObject>();
         events.AddRange(eventsPull.GetComponentsInChildren<EventObject>());
         
         
-        Debug.LogError("EventManager: Awake after events.AddRange");
         setRandomStateToEvents();
     }
 
@@ -58,27 +56,9 @@ public class EnableEventManager : SingletonManager<EnableEventManager>
 
     private void setRandomStateToEvents()
     {
-        Debug.LogError("EventManager: setRandomStateToEvents");
         
-        if (events.Count < 1) Debug.LogError("EventManager: setRandomStateToEvents: events.Count < 1");
-
-        //foreach (EventObject eventObject in events)
-        //{
-        //    Debug.LogError("EnableEventManager : SetRandomStateToEvents : Foreach");
-        //    if (eventObject.GetEventData().GetDatasEventsToFixFirst.Count > 0)
-        //    {
-        //        setOriginState(eventObject, EventObjState.NeedToFix);
-        //        continue;
-        //    }
-
-        //    float randomValue = Random.Range(0f, 1f);
-        //    Debug.LogError("чиcло = " + randomValue + " для " + eventObject.GetEventData().GetEventName);
-
-        //    if (randomValue <= FixedEventChance)
-        //        setOriginState(eventObject, EventObjState.Fixed);
-        //    else
-        //        setOriginState(eventObject, EventObjState.NeedToFix);
-        //}
+        //if (events.Count < 1) Debug.LogError("EventManager: setRandomStateToEvents: events.Count < 1");
+        
         for (int i = 0; i <= events.Count() - 1; i++)
         {
             //Debug.LogError("EnableEventManager : SetRandomStateToEvents : Foreach");
@@ -89,7 +69,6 @@ public class EnableEventManager : SingletonManager<EnableEventManager>
             }
 
             float randomValue = Random.Range(0f, 1f);
-            Debug.LogError("чиcло = " + randomValue + " для " + events[i].GetEventData().GetEventName);
 
             if (randomValue <= FixedEventChance)
                 setOriginState(events[i], EventObjState.Fixed);
@@ -100,7 +79,6 @@ public class EnableEventManager : SingletonManager<EnableEventManager>
     
     private void setOriginState(EventObject eventObject, EventObjState state)
     {
-        Debug.LogError("EventManager: setOriginState");
         if (state == EventObjState.Fixed)
         {
             eventObject.ChangeStateFix();

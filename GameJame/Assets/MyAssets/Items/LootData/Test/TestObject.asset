@@ -17,7 +17,7 @@ MonoBehaviour:
     \u043F\u0440\u0435\u0434\u043C\u0435\u0442, \u0445\u0443\u043B\u0438 \u0442\u0443\u0442
     \u0435\u0449\u0451 \u0440\u0430\u0441\u043F\u0438\u043D\u0430\u0442\u044C\u0441\u044F"
   lootIcon: {fileID: 10913, guid: 0000000000000000f000000000000000, type: 0}
-  lootPositionInHolder: {x: 0.0172, y: -0.0292, z: -0.0023}
+  lootPositionInHolder: {x: 0, y: 0, z: 0}
   lootRotationInHolder: {x: 0, y: 0, z: 0}
   lootPrefab: {fileID: 3634030028674446944, guid: 2afdc08754a89ac4ea9d546941e0ddfa, type: 3}
   lootSoundTake: {fileID: 0}

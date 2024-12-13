@@ -81,7 +81,7 @@ public class GameManager : MonoBehaviour
         OnGameStateChanged?.Invoke(currentState);
         OnPlayerStateChanged?.Invoke(playerState);
 
-        SetGameState();
+        //SetGameState();
     }
 
     private void OnEnable()
