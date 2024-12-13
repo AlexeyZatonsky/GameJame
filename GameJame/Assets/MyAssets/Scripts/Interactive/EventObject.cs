@@ -94,6 +94,7 @@ public class EventObject : InteractiveObject
         if (needLootData != inInventoryLootData)
         {
             Debug.LogError("У вас нет подходящего предмета для починки");
+            SubtitlesManager.Instance.PlayDialogueNewText("D_Fix", "У вас нет подходящего предмета для починки");
             return false;
         }
         

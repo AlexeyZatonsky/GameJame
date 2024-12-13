@@ -38,6 +38,8 @@ public class PlayerInteraction : MonoBehaviour
         Ray ray = playerCamera.ScreenPointToRay(new Vector3(Screen.width / 2, Screen.height / 2, 0));
         RaycastHit hit;
 
+        Debug.DrawRay(ray.origin, ray.direction * interactionDistance, Color.green, 2);
+
         if (Physics.Raycast(ray, out hit, interactionDistance, interactionLayers))
         {
             Loot loot = hit.collider.GetComponent<Loot>();
