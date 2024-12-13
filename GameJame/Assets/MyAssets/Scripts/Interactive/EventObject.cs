@@ -70,6 +70,7 @@ public class EventObject : InteractiveObject
         {
             if (eventNeedToFix.GetEventObjState == EventObjState.NeedToFix)
             {
+                SubtitlesManager.Instance.PlayDialogueNewText("D_Fix", "Сначала почини " + eventNeedToFix.name);
                 Debug.LogError("Сначала почини" + eventNeedToFix.name);
                 return false;
             }
