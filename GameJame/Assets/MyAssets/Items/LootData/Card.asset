@@ -17,6 +17,6 @@ MonoBehaviour:
   lootIcon: {fileID: 10913, guid: 0000000000000000f000000000000000, type: 0}
   lootPositionInHolder: {x: 0, y: 0, z: 0}
   lootRotationInHolder: {x: 0, y: 0, z: 0}
-  lootPrefab: {fileID: 3634030028674446944, guid: 104294442c0c03b4d9e2f3171bceb7a0, type: 3}
+  lootPrefab: {fileID: 8698457559602042879, guid: 19e7fd124d01abf4089e05f1415ff0a9, type: 3}
   lootAnimator: {fileID: 0}
   lootDestroAnimator: {fileID: 0}
