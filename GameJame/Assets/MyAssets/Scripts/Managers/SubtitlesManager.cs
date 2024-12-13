@@ -123,6 +123,19 @@ public class SubtitlesManager : MonoBehaviour
     public void PlayDialogue(string dialogueName)
     {
         DialogueData dialogue = dialogues.FirstOrDefault(d => d.name == dialogueName);
+
+        if (dialogue == null)
+        {
+            Debug.LogWarning($"Диалог с именем {dialogueName} не найден!");
+            return;
+        }
+
+        ShowDialogue(dialogue);
+    }
+    public void PlayDialogueNewText(string dialogueName, string newdesc)
+    {
+        DialogueData dialogue = dialogues.FirstOrDefault(d => d.name == dialogueName);
+        dialogue.dialogueLines[0].text = newdesc;
         if (dialogue == null)
         {
             Debug.LogWarning($"Диалог с именем {dialogueName} не найден!");
