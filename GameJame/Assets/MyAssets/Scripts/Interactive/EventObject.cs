@@ -32,6 +32,7 @@ public class EventObject : InteractiveObject
         }
         else
         {
+            Debug.LogError("Interacting with EventObject");
 
             LootData NeedLootData = eventData.GetDataLootToFix;
             LootData currentLootData = playerInventory.GetCurrentItem?.GetLootData;

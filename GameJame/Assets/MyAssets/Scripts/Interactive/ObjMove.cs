@@ -1,58 +1,72 @@
-using UnityEngine;
 using System.Collections;
+using UnityEngine;
 
-public class ObjMove : MonoBehaviour
+public class ObjMove : InteractiveObject
 {
     [Header("Movement Settings")]
-    public Vector3 pointA; // Начальная точка
-    public Vector3 pointB; // Конечная точка
-    public float moveSpeed = 2f; // Максимальная скорость перемещения
-    public float smoothTime = 0.4f; // Время сглаживания движения
+    public Transform pointA;
+    public Transform pointB;
+    public float moveSpeed = 2f;
+    public float smoothTime = 0.4f;
+    [SerializeField] private float toMoveCoordinate = 0.01f;
 
     private Coroutine currentCoroutine;
-    private Vector3 velocity = Vector3.zero; // Для сглаживания движения
-    private float currentSpeed = 0f; // Текущая скорость
+    private Vector3 velocity = Vector3.zero;
+    private float currentSpeed = 0f;
 
-    void Start()
+    private void Awake()
     {
-        // Начальная позиция остаётся как есть, не телепортируем
+        pointA = this.transform; // РЈСЃС‚Р°РЅР°РІР»РёРІР°РµРј С‚РµРєСѓС‰РёР№ РѕР±СЉРµРєС‚ РєР°Рє С‚РѕС‡РєСѓ A
+
+        if (pointB == null) // РџСЂРѕРІРµСЂСЏРµРј, Р·Р°РґР°РЅР° Р»Рё С‚РѕС‡РєР° B
+        {
+            GameObject pointBObject = new GameObject("PointB");
+            pointB = pointBObject.transform;
+        }
+
+        
+        Vector3 newPosition = new Vector3(
+            pointB.localPosition.x + toMoveCoordinate, 
+            pointB.localPosition.y, 
+            pointB.localPosition.z); // РџРѕР»СѓС‡Р°РµРј Р»РѕРєР°Р»СЊРЅСѓСЋ РїРѕР·РёС†РёСЋ РѕР±СЉРµРєС‚Р° pointB
+        
+        pointB.localPosition = newPosition;
+        
     }
 
     [ContextMenu("Move To Point B")]
     public void MoveToB()
     {
-        StartMovement(pointB);
+        StartMovement(pointB.position); // РџРµСЂРµРґР°РµРј РїРѕР·РёС†РёСЋ С‚РѕС‡РєРё B
     }
 
     [ContextMenu("Move To Point A")]
     public void MoveToA()
     {
-        StartMovement(pointA);
+        StartMovement(pointA.position); // РџРµСЂРµРґР°РµРј РїРѕР·РёС†РёСЋ С‚РѕС‡РєРё A
     }
 
     private void StartMovement(Vector3 target)
     {
         if (currentCoroutine != null)
         {
-            Debug.LogWarning("Движение уже выполняется. Подождите завершения текущей операции.");
-            return;
+            StopCoroutine(currentCoroutine); // РћСЃС‚Р°РЅР°РІР»РёРІР°РµРј С‚РµРєСѓС‰СѓСЋ РєРѕСЂСѓС‚РёРЅСѓ, РµСЃР»Рё РѕРЅР° СѓР¶Рµ Р·Р°РїСѓС‰РµРЅР°
         }
-        currentCoroutine = StartCoroutine(MoveToPoint(target));
+        
+        currentCoroutine = StartCoroutine(MoveToPoint(target)); // Р—Р°РїСѓСЃРєР°РµРј РЅРѕРІСѓСЋ РєРѕСЂСѓС‚РёРЅСѓ
     }
 
     private IEnumerator MoveToPoint(Vector3 target)
     {
-        while (Vector3.Distance(transform.position, target) > 0.01f)
+        while (Vector3.Distance(transform.position, target) > 0.01f) // РџРѕРєР° РѕР±СЉРµРєС‚ РЅРµ РґРѕСЃС‚РёРіРЅРµС‚ С†РµР»Рё
         {
-            // Постепенное увеличение скорости для плавного старта
-            currentSpeed = Mathf.Lerp(currentSpeed, moveSpeed, Time.deltaTime / smoothTime);
-            transform.position = Vector3.SmoothDamp(transform.position, target, ref velocity, smoothTime, currentSpeed);
+            currentSpeed = Mathf.Lerp(currentSpeed, moveSpeed, Time.deltaTime / smoothTime); // РџР»Р°РІРЅРѕРµ СѓРІРµР»РёС‡РµРЅРёРµ СЃРєРѕСЂРѕСЃС‚Рё
+            transform.position = Vector3.SmoothDamp(transform.position, target, ref velocity, smoothTime, currentSpeed); // РџР»Р°РІРЅРѕРµ РїРµСЂРµРјРµС‰РµРЅРёРµ
             yield return null;
         }
 
-        // Устанавливаем точную позицию для устранения дрожания
-        transform.position = target;
-        currentSpeed = 0f; // Сбрасываем скорость для следующего движения
-        currentCoroutine = null; // Сбрасываем текущую корутину
+        transform.position = target; // Р“Р°СЂР°РЅС‚РёСЂСѓРµРј С‚РѕС‡РЅСѓСЋ РїРѕР·РёС†РёСЋ
+        currentSpeed = 0f; // РЎР±СЂР°СЃС‹РІР°РµРј СЃРєРѕСЂРѕСЃС‚СЊ
+        currentCoroutine = null; // РЎР±СЂР°СЃС‹РІР°РµРј С‚РµРєСѓС‰СѓСЋ РєРѕСЂСѓС‚РёРЅСѓ
     }
 }
