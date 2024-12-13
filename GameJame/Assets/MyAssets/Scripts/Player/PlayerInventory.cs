@@ -83,6 +83,7 @@ public class PlayerInventory : MonoBehaviour
             collider.isTrigger = false;
         }
         
+        SoundManager.Instance.PlaySound("DropItem");
         currentItem = null;
         OnItemChanged?.Invoke(null); //вызвать в конце
     }

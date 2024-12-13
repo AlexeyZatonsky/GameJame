@@ -81,6 +81,7 @@ public class GameManager : MonoBehaviour
         OnGameStateChanged?.Invoke(currentState);
         OnPlayerStateChanged?.Invoke(playerState);
 
+        SoundManager.Instance.PlayMusic("GameMusic",  1);
         //SetGameState();
     }
 
