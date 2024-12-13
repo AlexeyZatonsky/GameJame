@@ -1,72 +1,102 @@
 using System.Collections;
 using UnityEngine;
 
-public class ObjMove : InteractiveObject
+public class ObjMove : MonoBehaviour
 {
     [Header("Movement Settings")]
-    public Transform pointA;
-    public Transform pointB;
-    public float moveSpeed = 2f;
-    public float smoothTime = 0.4f;
-    [SerializeField] private float toMoveCoordinate = 0.01f;
+    public Transform pointA; // Начальная точка
+    public Transform pointB; // Конечная точка
+    public float moveSpeed = 2f; // Скорость перемещения
+    public float smoothTime = 0.4f; // Время сглаживания
 
-    private Coroutine currentCoroutine;
-    private Vector3 velocity = Vector3.zero;
-    private float currentSpeed = 0f;
+    [SerializeField] private float dir;
+    [SerializeField] private bool _open = true;
+
+    private Coroutine currentCoroutine; // Текущая корутина
+    private Vector3 velocity = Vector3.zero; // Вектор сглаживания
 
     private void Awake()
     {
-        pointA = this.transform; // Устанавливаем текущий объект как точку A
-
-        if (pointB == null) // Проверяем, задана ли точка B
+        // Если точка A не задана, берем текущую позицию объекта
+        if (pointA == null)
         {
-            GameObject pointBObject = new GameObject("PointB");
-            pointB = pointBObject.transform;
+            GameObject pointAObject = new GameObject("PointA");
+            pointAObject.transform.position = transform.position;
+            pointA = pointAObject.transform;
         }
 
-        
-        Vector3 newPosition = new Vector3(
-            pointB.localPosition.x + toMoveCoordinate, 
-            pointB.localPosition.y, 
-            pointB.localPosition.z); // Получаем локальную позицию объекта pointB
-        
-        pointB.localPosition = newPosition;
-        
+        // Если точка B не задана, создаем её рядом с объектом
+        if (pointB == null)
+        {
+            GameObject pointBObject = new GameObject("PointB");
+            pointBObject.transform.position = transform.position + new Vector3(dir, 0f, 0f); // Смещаем вправо
+            pointB = pointBObject.transform;
+        }
     }
 
     [ContextMenu("Move To Point B")]
     public void MoveToB()
     {
-        StartMovement(pointB.position); // Передаем позицию точки B
+        StartMovement(pointB.position);
+        _open = false;
     }
 
     [ContextMenu("Move To Point A")]
     public void MoveToA()
     {
-        StartMovement(pointA.position); // Передаем позицию точки A
+        StartMovement(pointA.position);
+        _open = true;
+    }
+
+    public void Move()
+    {
+        if (_open)
+        {
+            MoveToB();
+        }
+        else {
+            MoveToA();
+        }
+
     }
 
     private void StartMovement(Vector3 target)
     {
+        // Если есть запущенная корутина, останавливаем её
         if (currentCoroutine != null)
         {
-            StopCoroutine(currentCoroutine); // Останавливаем текущую корутину, если она уже запущена
+            StopCoroutine(currentCoroutine);
         }
-        
-        currentCoroutine = StartCoroutine(MoveToPoint(target)); // Запускаем новую корутину
+
+        // Запускаем новую корутину для перемещения
+        currentCoroutine = StartCoroutine(MoveToPoint(target));
     }
 
     private IEnumerator MoveToPoint(Vector3 target)
     {
         while (Vector3.Distance(transform.position, target) > 0.01f) // Пока объект не достигнет цели
         {
-            currentSpeed = Mathf.Lerp(currentSpeed, moveSpeed, Time.deltaTime / smoothTime); // Плавное увеличение скорости
-            transform.position = Vector3.SmoothDamp(transform.position, target, ref velocity, smoothTime, currentSpeed); // Плавное перемещение
+            // Плавное перемещение с использованием SmoothDamp
+            transform.position = Vector3.SmoothDamp(transform.position, target, ref velocity, smoothTime, moveSpeed);
             yield return null;
         }
 
-        transform.position = target; // Гарантируем точную позицию
-        currentSpeed = 0f; // Сбрасываем скорость
-        currentCoroutine = null; // Сбрасываем текущую корутину
+        // Устанавливаем объект точно в целевую позицию
+        transform.position = target;
+
+        // Завершаем корутину
+        currentCoroutine = null;
+    }
+
+    private void OnDrawGizmos()
+    {
+        // Отображаем линии между точками A и B для наглядности
+        if (pointA != null && pointB != null)
+        {
+            Gizmos.color = Color.green;
+            Gizmos.DrawLine(pointA.position, pointB.position);
+            Gizmos.DrawSphere(pointA.position, 0.1f);
+            Gizmos.DrawSphere(pointB.position, 0.1f);
+        }
     }
 }
