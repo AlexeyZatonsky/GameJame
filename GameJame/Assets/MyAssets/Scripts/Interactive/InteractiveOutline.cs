@@ -80,11 +80,11 @@ public class InteractiveOutline : MonoBehaviour
         player = GameObject.FindWithTag("Player").transform;
         // Cache renderers
         renderers = GetComponentsInChildren<Renderer>();
-        Debug.LogError("InteractiveOutLine Awake1");
+        
         // Instantiate outline materials
         outlineMaskMaterial = Instantiate(Resources.Load<Material>("Materials/OutlineMask"));
         outlineFillMaterial = Instantiate(Resources.Load<Material>("Materials/OutlineFill"));
-        Debug.LogError("InteractiveOutLine Awake2");
+        
 
         outlineMaskMaterial.name = "OutlineMask (Instance)";
         outlineFillMaterial.name = "OutlineFill (Instance)";

@@ -34,7 +34,7 @@ public class EnableEventManager : SingletonManager<EnableEventManager>
     [SerializeField] private GameObject eventsPull;
     
 
-    [SerializeField] private float FixedEventChance = 0.2f;
+    [SerializeField] private int FixedEventChance = 2;
 
     public List<EventObject> GetEvents => events;
 
@@ -68,9 +68,9 @@ public class EnableEventManager : SingletonManager<EnableEventManager>
                 continue;
             }
 
-            float randomValue = Random.Range(0f, 1f);
+            int randomValue = Random.Range(0, 1);
 
-            if (randomValue <= FixedEventChance)
+            if (FixedEventChance < randomValue)
                 setOriginState(events[i], EventObjState.Fixed);
             else
                 setOriginState(events[i], EventObjState.NeedToFix);
@@ -81,10 +81,16 @@ public class EnableEventManager : SingletonManager<EnableEventManager>
     {
         if (state == EventObjState.Fixed)
         {
+            if(eventObject.GetEventData().GetEventObjState == EventObjState.Fixed)
+                return;
+            
             eventObject.ChangeStateFix();
             events.Remove(eventObject);
             return;
         }
+        
+        if (eventObject.GetEventData().GetEventObjState == EventObjState.NeedToFix)
+            return;
         
         eventObject.ChangeStateNeedFix();
         

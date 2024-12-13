@@ -4,7 +4,7 @@ using UnityEngine;
 public class EventObjectManager : SingletonManager<EventObjectManager>
 {
     [SerializeField] private List<EventObject> eventObjectsList = new List<EventObject>();
-    [SerializeField] private float ChanceToFixed=50;
+    [SerializeField] private int ChanceToFixed=50;
     [SerializeField] private int fixedCount = 0;
     
 
@@ -14,7 +14,7 @@ public class EventObjectManager : SingletonManager<EventObjectManager>
         eventObjectsList = new List<EventObject>(FindObjectsOfType<EventObject>());
         foreach (var eventObject in eventObjectsList)
         {
-            float randomValue = Random.Range(0f, 100f);
+            int randomValue = Random.Range(0, 100);
             //Fix with Chance
             if (randomValue < ChanceToFixed)
             {

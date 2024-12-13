@@ -66,8 +66,11 @@ public class EventObject : InteractiveObject
     /// <returns>Bool</returns>
     private bool _canFixOfMiniEvents(List<EventData> eventsToFixFirst)
     {
+        Debug.LogError("EventObject can't be fixed");
         foreach (EventData eventNeedToFix in eventsToFixFirst)
         {
+            Debug.LogError("EventObject can't be fixed Foreach");
+
             if (eventNeedToFix.GetEventObjState == EventObjState.NeedToFix)
             {
                 SubtitlesManager.Instance.PlayDialogueNewText("D_Fix", "Сначала почини " + eventNeedToFix.name);

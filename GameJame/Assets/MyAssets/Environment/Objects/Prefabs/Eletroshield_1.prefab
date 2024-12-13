@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 344260463643822884}
   - component: {fileID: 5071800428577838562}
   - component: {fileID: 8722740019597294459}
+  - component: {fileID: 7564752933602557822}
   m_Layer: 0
   m_Name: Eletroshield_1
   m_TagString: Untagged
@@ -101,6 +102,27 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   intractiveObjectData: {fileID: 0}
   canInteract: 1
-  eventData: {fileID: 0}
+  eventData: {fileID: 11400000, guid: 419d76e4899eef540ba00d6167bbf77f, type: 2}
   playerInventory: {fileID: 0}
   objectRenderer: {fileID: 0}
+--- !u!65 &7564752933602557822
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5308476857793499548}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1.1481805, y: 0.8472122, z: 0.3737995}
+  m_Center: {x: -0.27253008, y: -0.000000014901161, z: 0.18689784}

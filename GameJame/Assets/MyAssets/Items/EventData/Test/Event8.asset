@@ -16,9 +16,9 @@ MonoBehaviour:
   eventPositionInHolder: {x: 0, y: 0, z: 0}
   eventRotationInHolder: {x: 0, y: 0, z: 0}
   interactObjectPrefab: {fileID: 0}
-  interactObjectSound: {fileID: 0}
-  cantInteractSound: {fileID: 0}
+  interactObjectSound: PickUp
+  cantInteractSound: PickUp
   interactObjectAnimator: {fileID: 0}
   datasEventsToFixFirst: []
-  eventObjState: 1
+  eventObjState: 0
   dataLootToFix: {fileID: 0}
