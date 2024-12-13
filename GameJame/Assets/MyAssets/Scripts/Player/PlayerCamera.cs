@@ -56,7 +56,7 @@ public class PlayerCamera : MonoBehaviour
 
     private void CanFollowHead(GameState state)
     {
-        if (state == GameState.InBed)
+        if (state == GameState.InBed || state == GameState.Lose)
         {
             canFollowHead = true;
         }

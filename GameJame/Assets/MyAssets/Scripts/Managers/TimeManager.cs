@@ -56,22 +56,32 @@ public class TimeManager : MonoBehaviour
 
     private IEnumerator TimerCoroutine()
     {
+        int previousSeconds = Mathf.FloorToInt(currentTime);
+        
         while (currentTime > 0)
         {
-            int minutes = Mathf.FloorToInt(currentTime / 60f);
-            int seconds = Mathf.FloorToInt(currentTime % 60f);
-            timerText.SetText($"{minutes:00}:{seconds:00}");
+            currentTime -= Time.deltaTime;
             
-            if (currentTime <= gameManager.GetTimeToBed() * 0.25f)
+            int currentSeconds = Mathf.FloorToInt(currentTime);
+            
+            if (currentSeconds != previousSeconds)
             {
-                timerText.color = Color.red;
-            }
-            else if (currentTime <= gameManager.GetTimeToBed() * 0.5f)
-            {
-                timerText.color = Color.yellow;
+                int minutes = currentSeconds / 60;
+                int seconds = currentSeconds % 60;
+                timerText.SetText($"{minutes:00}:{seconds:00}");
+                
+                if (currentSeconds <= gameManager.GetTimeToBed() * 0.25f)
+                {
+                    timerText.color = Color.red;
+                }
+                else if (currentSeconds <= gameManager.GetTimeToBed() * 0.5f)
+                {
+                    timerText.color = Color.yellow;
+                }
+                
+                previousSeconds = currentSeconds;
             }
 
-            currentTime -= Time.deltaTime;
             yield return null;
         }
         

@@ -30,11 +30,16 @@ public class GameManager : MonoBehaviour
     [Header("Timer Settings")]
     [SerializeField] private float timeToBed = 180f;
     [SerializeField] private float timeForLastChance = 60f;
+    [SerializeField] private float loseWalkDuration = 2f;
+    [SerializeField] private float loseTurnDuration = 1.5f;
+    [SerializeField] private float loseBlackScreenDuration = 2f;
     [SerializeField] private float delayBeforeShowChoiceUI = 2f;
     [SerializeField] private float delayBeforeBlackScreenFadeOut = 1f;
     [SerializeField] private float blackScreenSpeedFade = 1f;
     [SerializeField] private float blackScreenSpeedFadeBackMenu = 2f;
     [SerializeField] private float delayBeforeMainMenu = 5f;
+    [SerializeField] private Vector3 enemySpawnOffset = new Vector3(0, 0, 2f);
+    [SerializeField] private Vector3 enemyRotationAngles = new Vector3(0, 180, 0);
 
     [Header("Game Settings")]
     [SerializeField] private int unfixedEventObjectsCount = 0;
@@ -42,6 +47,7 @@ public class GameManager : MonoBehaviour
     [Header("GameState Objects")]
     [SerializeField] private Camera winCamera;
     [SerializeField] private Transform playerLosePosition;
+    [SerializeField] private GameObject enemy;
 
     public event Action<GameState> OnGameStateChanged;
     public event Action<PlayerState> OnPlayerStateChanged;
@@ -124,10 +130,12 @@ public class GameManager : MonoBehaviour
         yield return StartCoroutine(goBedUI.FadeBlackScreen(false, blackScreenSpeedFade));
         UpdateGameState(GameState.FirstTimer, PlayerState.Action);
         timeManager.SetTimerUI(true);
+        SubtitlesManager.Instance.PlayDialogue("D_FirstTimer_Start");
     }
 
     private IEnumerator HandleBedTransition()
     {
+        timeManager.SetTimerUI(false);
         yield return StartCoroutine(goBedUI.FadeBlackScreen(true, blackScreenSpeedFade));
         
         timeManager.SetTimerUI(false);
@@ -190,7 +198,7 @@ public class GameManager : MonoBehaviour
         playerInfo.transform.rotation = playerLosePosition.rotation;
 
         playerInfo.GetComponent<CharacterController>().enabled = false;
-        playerInfo.GetComponent<Animator>().SetBool("IS_Lose", true);
+        playerInfo.GetComponent<Animator>().SetBool("IS_LoseWalk", true);
         playerInfo.GetComponent<Animator>().applyRootMotion = true;
         playerInfo.GetComponent<PlayerRigController>().SetHeadUpperChestWeight(0f);
     }
@@ -255,8 +263,32 @@ public class GameManager : MonoBehaviour
         OnPlayerStateChanged?.Invoke(playerState);
 
         PlayerLose();
+        StartCoroutine(HandleLoseEndSequence());
+    }
+
+    private IEnumerator HandleLoseEndSequence()
+    {
+        SubtitlesManager.Instance.PlayDialogue("D_EndGame");
+
+        yield return new WaitForSeconds(loseWalkDuration);
+
+        Vector3 enemyPosition = playerInfo.transform.position + playerInfo.transform.TransformDirection(enemySpawnOffset);
+        Quaternion enemyRotation = Quaternion.Euler(enemyRotationAngles);
+        GameObject spawnedEnemy = Instantiate(enemy, enemyPosition, enemyRotation);
         
-        // TODO: Показать экран поражения. Перенос персонажа в зал с камином, поворот назад, а там дед ебалай.
+        playerInfo.GetComponent<Animator>().SetBool("IS_LoseWalk", false);
+        playerInfo.GetComponent<Animator>().SetBool("IS_LoseTurn", true);
+
+        spawnedEnemy.GetComponent<Animator>().SetTrigger("Punch");
+        
+        yield return new WaitForSeconds(loseTurnDuration);
+        
+        goBedUI.SetBlackScreenInstant(true);
+        
+        yield return new WaitForSeconds(loseBlackScreenDuration);
+        
+        CursorController.Instance.ShowCursor();
+        UnityEngine.SceneManagement.SceneManager.LoadScene("MainMenu");
     }
 
     private IEnumerator ReturnToMainMenu()
