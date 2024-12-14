@@ -16,8 +16,8 @@ MonoBehaviour:
   eventPositionInHolder: {x: 0, y: 0, z: 0}
   eventRotationInHolder: {x: 0, y: 0, z: 0}
   interactObjectPrefab: {fileID: 0}
-  interactObjectSound: ElectroPanel
-  cantInteractSound: ElectroPanelCant
+  interactObjectSound: ShieldOn
+  cantInteractSound: ShieldCant
   interactObjectAnimator: {fileID: 0}
   datasEventsToFixFirst: []
   eventObjState: 0

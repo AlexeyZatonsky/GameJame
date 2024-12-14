@@ -35,4 +35,11 @@ public class SingletonManager<T> : MonoBehaviour where T : Component
             }
         }
 
+        protected virtual void OnDestroy()
+        {
+            if (instance == this)
+            {
+                instance = null;
+            }
+        }
     }

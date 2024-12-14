@@ -305,11 +305,11 @@ public class GameManager : MonoBehaviour
     {
         if (currentState == GameState.InBed)
         {
-            if (eventObjectManager.EventObjectsList.Count == eventObjectManager.FixedCount)
+            if (eventObjectManager.EventObjectsList.Count-1 <= eventObjectManager.FixedCount)
             {
                 return GameState.Win;
             }
-            else if (eventObjectManager.EventObjectsList.Count - eventObjectManager.FixedCount <= unfixedEventObjectsCount)
+            else if (eventObjectManager.EventObjectsList.Count-1 - eventObjectManager.FixedCount <= unfixedEventObjectsCount)
             {
                 return GameState.LastChanceTimer;
             }
@@ -320,7 +320,7 @@ public class GameManager : MonoBehaviour
         }
         else if (currentState == GameState.LastChanceTimer)
         {
-            if (eventObjectManager.EventObjectsList.Count == eventObjectManager.FixedCount)
+            if (eventObjectManager.EventObjectsList.Count-1 <= eventObjectManager.FixedCount)
             {
                 return GameState.Win;
             }

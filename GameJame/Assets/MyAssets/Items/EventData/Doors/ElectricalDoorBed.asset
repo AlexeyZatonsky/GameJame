@@ -22,4 +22,4 @@ MonoBehaviour:
   datasEventsToFixFirst:
   - {fileID: 11400000, guid: fca99655685cb4f47b929a5a24159ff4, type: 2}
   eventObjState: 0
-  dataLootToFix: {fileID: 0}
+  dataLootToFix: {fileID: 11400000, guid: ecca7fa5570c35e40b896ccab2cfd43a, type: 2}
