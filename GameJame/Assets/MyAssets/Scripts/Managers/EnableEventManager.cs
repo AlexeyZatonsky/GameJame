@@ -34,7 +34,7 @@ public class EnableEventManager : SingletonManager<EnableEventManager>
     [SerializeField] private GameObject eventsPull;
     
 
-    [SerializeField] private int FixedEventChance = 10;
+    [SerializeField] private int FixedEventChance = 1;
 
     public List<EventObject> GetEvents => events;
 
@@ -43,20 +43,26 @@ public class EnableEventManager : SingletonManager<EnableEventManager>
     protected override void Awake()
     {
         base.Awake();
-
+        
         EventObject[] local_events = GetComponentsInChildren<EventObject>();
         events.AddRange(eventsPull.GetComponentsInChildren<EventObject>());
-
-        if (events.Count() > 0)
-        {
-            events.ForEach(eventObject => eventObject.ChangeStateNeedFix());
-        }
-        
         EventObjectManager.Instance.SetFixedCount(0);
 
         setRandomStateToEvents();
     }
 
+    public void rebootEventPool()
+    {
+        for (int i = 0; i <= events.Count() - 1; i++)
+        {
+            events[i].ChangeStateNeedFix();
+        }
+        
+        events.Clear();
+    } 
+
+
+    
     
 
 
@@ -74,9 +80,12 @@ public class EnableEventManager : SingletonManager<EnableEventManager>
                 continue;
             }
 
-            int randomValue = 100;//Random.Range(0, 100);
+            int randomValue = Random.Range(0, 100);
 
-            if (FixedEventChance == randomValue)
+            // if(events[i].GetEventData().GetEventObjState == EventObjState.Fixed)
+            //     setOriginState(events[i], EventObjState.NeedToFix);
+            //
+            if (FixedEventChance > randomValue)
                 setOriginState(events[i], EventObjState.Fixed);
             else
                 setOriginState(events[i], EventObjState.NeedToFix);

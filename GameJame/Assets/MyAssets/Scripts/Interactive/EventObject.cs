@@ -134,18 +134,13 @@ public class EventObject : InteractiveObject
 
     public void ChangeView()
     {
-        
-        
-            if (eventData.GetEventObjState == EventObjState.Fixed)
-            {
-                objectRenderer.material.color = Color.green;
-                return;
-            }
+        if (eventData.GetEventObjState == EventObjState.Fixed)
+        {
+            objectRenderer.material.color = Color.green;
+            return;
+        }
 
-            objectRenderer.material.color = Color.red;
-            
-        
-
+        objectRenderer.material.color = Color.red;
     }
 
     public void OnMouseOver()

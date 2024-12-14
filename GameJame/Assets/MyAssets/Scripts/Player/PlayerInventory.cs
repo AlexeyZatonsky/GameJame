@@ -91,6 +91,8 @@ public class PlayerInventory : MonoBehaviour
     
     
     //TODO: Метод для удаления предмета 
+    
+    
     public void DestroyItem()
     {
         if (currentItem == null) return;

@@ -244,6 +244,9 @@ public class GameManager : MonoBehaviour
 
     private void ShowWinEnd()
     {
+        
+        EnableEventManager.Instance.rebootEventPool();
+        
         playerState = PlayerState.NoAction;
         OnPlayerStateChanged?.Invoke(playerState);
 
@@ -260,6 +263,8 @@ public class GameManager : MonoBehaviour
 
     private void ShowLoseEnd()
     {
+        EnableEventManager.Instance.rebootEventPool();
+        
         playerState = PlayerState.NoAction;
         OnPlayerStateChanged?.Invoke(playerState);
 

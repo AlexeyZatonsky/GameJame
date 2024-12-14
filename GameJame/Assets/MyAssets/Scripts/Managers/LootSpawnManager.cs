@@ -36,6 +36,7 @@ namespace MyAssets.Managers
                 //else { Debug.LogError("LootSpawnManager initializeLootDataToSpawn LootData Is NuLL"); }
             }
         }
+        
 
         private void spawnLoot()
         {
