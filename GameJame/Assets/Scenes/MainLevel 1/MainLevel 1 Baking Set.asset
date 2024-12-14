@@ -17,17 +17,17 @@ MonoBehaviour:
   settings:
     m_Version: 1
     dilationSettings:
-      enableDilation: 0
+      enableDilation: 1
       dilationDistance: 1
-      dilationValidityThreshold: 0.25
-      dilationIterations: 1
+      dilationValidityThreshold: 0.14999998
+      dilationIterations: 3
       squaredDistWeighting: 1
     virtualOffsetSettings:
       useVirtualOffset: 1
-      validityThreshold: 0.25
-      outOfGeoOffset: 0.01
-      searchMultiplier: 0.2
-      rayOriginBias: -0.001
+      validityThreshold: 0.050000012
+      outOfGeoOffset: 0.05
+      searchMultiplier: 0.25
+      rayOriginBias: -0.04
       collisionMask:
         serializedVersion: 2
         m_Bits: 4294967291
@@ -41,11 +41,11 @@ MonoBehaviour:
     m_Values:
     - position: {x: 0, y: -1, z: -1}
       index: 0
-      probeCount: 2752
+      probeCount: 2880
       minSubdiv: 0
       indexChunkCount: 91
       shChunkCount: 1
-      bricksCount: 43
+      bricksCount: 45
       indirectionEntryInfo:
       - positionInBricks: {x: 0, y: -27, z: -27}
         minSubdiv: 0
@@ -55,11 +55,11 @@ MonoBehaviour:
         hasOnlyBiggerBricks: 0
     - position: {x: 0, y: -1, z: 0}
       index: 6
-      probeCount: 2688
+      probeCount: 2880
       minSubdiv: 0
       indexChunkCount: 91
       shChunkCount: 1
-      bricksCount: 42
+      bricksCount: 45
       indirectionEntryInfo:
       - positionInBricks: {x: 0, y: -27, z: 0}
         minSubdiv: 0
@@ -69,11 +69,11 @@ MonoBehaviour:
         hasOnlyBiggerBricks: 0
     - position: {x: 0, y: 0, z: -1}
       index: 2
-      probeCount: 7872
+      probeCount: 8064
       minSubdiv: 0
       indexChunkCount: 91
       shChunkCount: 1
-      bricksCount: 123
+      bricksCount: 126
       indirectionEntryInfo:
       - positionInBricks: {x: 0, y: 0, z: -27}
         minSubdiv: 0
@@ -83,11 +83,11 @@ MonoBehaviour:
         hasOnlyBiggerBricks: 0
     - position: {x: 0, y: 0, z: 0}
       index: 8
-      probeCount: 9408
+      probeCount: 9472
       minSubdiv: 0
       indexChunkCount: 91
       shChunkCount: 2
-      bricksCount: 147
+      bricksCount: 148
       indirectionEntryInfo:
       - positionInBricks: {x: 0, y: 0, z: 0}
         minSubdiv: 0
@@ -101,24 +101,24 @@ MonoBehaviour:
   cellSharedDataAsset:
     m_AssetGUID: 1d9c161c3492b614f8ceb52a125fac68
     m_StreamableAssetPath: APVStreamingAssets\42f1b57db5c54044baaa044db4de879e\1d9c161c3492b614f8ceb52a125fac68.bytes
-    m_ElementSize: 8192
+    m_ElementSize: 81920
     m_StreamableCellDescs:
       m_Keys: 00000000060000000200000008000000
       m_Values:
       - offset: 0
         elementCount: 1
-      - offset: 8192
+      - offset: 81920
         elementCount: 1
-      - offset: 16384
+      - offset: 163840
         elementCount: 1
-      - offset: 24576
+      - offset: 245760
         elementCount: 2
     m_Asset: {fileID: 0}
   scenarios:
     m_Keys:
     - Default
     m_Values:
-    - sceneHash: 716676504
+    - sceneHash: -100631510
       cellDataAsset:
         m_AssetGUID: 95e2c2830a7b5ae45bb355c76a5396eb
         m_StreamableAssetPath: APVStreamingAssets\42f1b57db5c54044baaa044db4de879e\95e2c2830a7b5ae45bb355c76a5396eb.bytes
@@ -175,13 +175,13 @@ MonoBehaviour:
       m_Keys: 00000000060000000200000008000000
       m_Values:
       - offset: 0
-        elementCount: 43
-      - offset: 688
-        elementCount: 42
-      - offset: 1360
-        elementCount: 123
-      - offset: 3328
-        elementCount: 147
+        elementCount: 45
+      - offset: 720
+        elementCount: 45
+      - offset: 1440
+        elementCount: 126
+      - offset: 3456
+        elementCount: 148
     m_Asset: {fileID: 0}
   cellSupportDataAsset:
     m_AssetGUID: faad53d234facc4408b0b4d030c73bf1
@@ -208,8 +208,8 @@ MonoBehaviour:
   bakedSimplificationLevels: 3
   bakedMinDistanceBetweenProbes: 1
   bakedProbeOcclusion: 0
-  bakedSkyOcclusionValue: 0
-  bakedSkyShadingDirectionValue: 0
+  bakedSkyOcclusionValue: 1
+  bakedSkyShadingDirectionValue: 1
   bakedProbeOffset: {x: 0, y: 0, z: 0}
   bakedMaskCount: 1
   bakedLayerMasks:
@@ -223,9 +223,9 @@ MonoBehaviour:
   L2TextureChunkSize: 32768
   ProbeOcclusionChunkSize: 0
   sharedValidityMaskChunkSize: 8192
-  sharedSkyOcclusionL0L1ChunkSize: 0
-  sharedSkyShadingDirectionIndicesChunkSize: 0
-  sharedDataChunkSize: 8192
+  sharedSkyOcclusionL0L1ChunkSize: 65536
+  sharedSkyShadingDirectionIndicesChunkSize: 8192
+  sharedDataChunkSize: 81920
   supportPositionChunkSize: 98304
   supportValidityChunkSize: 32768
   supportTouchupChunkSize: 32768
@@ -242,12 +242,12 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 4294967295
   minRendererVolumeSize: 0.1
-  skyOcclusion: 0
+  skyOcclusion: 1
   skyOcclusionBakingSamples: 2048
   skyOcclusionBakingBounces: 2
   skyOcclusionAverageAlbedo: 0.6
   skyOcclusionBackFaceCulling: 0
-  skyOcclusionShadingDirection: 0
+  skyOcclusionShadingDirection: 1
   useRenderingLayers: 0
   renderingLayerMasks: []
   m_SceneBakeData:

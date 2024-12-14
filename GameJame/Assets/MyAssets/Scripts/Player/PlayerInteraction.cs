@@ -9,6 +9,8 @@ public class PlayerInteraction : MonoBehaviour
     private Camera playerCamera;
     private PlayerInventory playerInventory;
 
+    private bool canInteractWithBed = true;
+
     private void Awake()
     {
         var playerCameraComponent = GetComponentInChildren<PlayerCamera>();
@@ -18,6 +20,8 @@ public class PlayerInteraction : MonoBehaviour
         }
 
         playerInventory = GetComponent<PlayerInventory>();
+
+        canInteractWithBed = true;
     }
 
     private void Update()
@@ -55,6 +59,13 @@ public class PlayerInteraction : MonoBehaviour
             {
                 interactive.Interact();
                 SoundManager.Instance.PlaySound("Zachem");
+            }
+
+            BedController bedController = hit.collider.GetComponent<BedController>();
+            if (bedController != null && canInteractWithBed)
+            {
+                GameManager.Instance.SetGameState();
+                canInteractWithBed = false;
             }
         }
     }

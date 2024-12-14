@@ -71,6 +71,15 @@ public partial class @PlayerInputs: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Skip"",
+                    ""type"": ""Button"",
+                    ""id"": ""ebdde87b-432f-42a6-9f57-cd4bffb155ea"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -172,6 +181,17 @@ public partial class @PlayerInputs: IInputActionCollection2, IDisposable
                     ""action"": ""Drop"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""25d02aaa-a05a-4083-8a43-a1d00598d32e"",
+                    ""path"": ""<Keyboard>/space"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Skip"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -202,6 +222,7 @@ public partial class @PlayerInputs: IInputActionCollection2, IDisposable
         m_Player_Run = m_Player.FindAction("Run", throwIfNotFound: true);
         m_Player_Interact = m_Player.FindAction("Interact", throwIfNotFound: true);
         m_Player_Drop = m_Player.FindAction("Drop", throwIfNotFound: true);
+        m_Player_Skip = m_Player.FindAction("Skip", throwIfNotFound: true);
     }
 
     ~@PlayerInputs()
@@ -273,6 +294,7 @@ public partial class @PlayerInputs: IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_Run;
     private readonly InputAction m_Player_Interact;
     private readonly InputAction m_Player_Drop;
+    private readonly InputAction m_Player_Skip;
     public struct PlayerActions
     {
         private @PlayerInputs m_Wrapper;
@@ -282,6 +304,7 @@ public partial class @PlayerInputs: IInputActionCollection2, IDisposable
         public InputAction @Run => m_Wrapper.m_Player_Run;
         public InputAction @Interact => m_Wrapper.m_Player_Interact;
         public InputAction @Drop => m_Wrapper.m_Player_Drop;
+        public InputAction @Skip => m_Wrapper.m_Player_Skip;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -306,6 +329,9 @@ public partial class @PlayerInputs: IInputActionCollection2, IDisposable
             @Drop.started += instance.OnDrop;
             @Drop.performed += instance.OnDrop;
             @Drop.canceled += instance.OnDrop;
+            @Skip.started += instance.OnSkip;
+            @Skip.performed += instance.OnSkip;
+            @Skip.canceled += instance.OnSkip;
         }
 
         private void UnregisterCallbacks(IPlayerActions instance)
@@ -325,6 +351,9 @@ public partial class @PlayerInputs: IInputActionCollection2, IDisposable
             @Drop.started -= instance.OnDrop;
             @Drop.performed -= instance.OnDrop;
             @Drop.canceled -= instance.OnDrop;
+            @Skip.started -= instance.OnSkip;
+            @Skip.performed -= instance.OnSkip;
+            @Skip.canceled -= instance.OnSkip;
         }
 
         public void RemoveCallbacks(IPlayerActions instance)
@@ -358,5 +387,6 @@ public partial class @PlayerInputs: IInputActionCollection2, IDisposable
         void OnRun(InputAction.CallbackContext context);
         void OnInteract(InputAction.CallbackContext context);
         void OnDrop(InputAction.CallbackContext context);
+        void OnSkip(InputAction.CallbackContext context);
     }
 }

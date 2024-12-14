@@ -157,6 +157,7 @@ public class GameManager : MonoBehaviour
         if (newState == GameState.Lose) ShowLoseEnd();
         else if (newState == GameState.Win) ShowWinEnd();
 
+        timeManager.SetTimerUI(false);
         playerInfo.GetComponent<PlayerInventory>().DropItem(true, 2f);
         
         yield return StartCoroutine(goBedUI.FadeBlackScreen(false, blackScreenSpeedFade, delayBeforeBlackScreenFadeOut));
@@ -213,6 +214,7 @@ public class GameManager : MonoBehaviour
             UpdateGameState(newState, PlayerState.Action);
             PlayerWakeUp();
             goBedUI.ShowDot(true);
+            //SubtitlesManager.Instance.PlayDialogue("D_LastChance");
             StartCoroutine(goBedUI.FadeBlackScreen(false, blackScreenSpeedFade, delayBeforeBlackScreenFadeOut));
         }
         else
@@ -244,7 +246,6 @@ public class GameManager : MonoBehaviour
 
     private void ShowWinEnd()
     {
-        
         EnableEventManager.Instance.rebootEventPool();
         
         playerState = PlayerState.NoAction;
@@ -257,6 +258,7 @@ public class GameManager : MonoBehaviour
         var playerCamera = playerInfo.GetComponentInChildren<PlayerCamera>().GetComponentInChildren<Camera>();
         playerCamera.gameObject.SetActive(false);
         winCamera.gameObject.SetActive(true);
+        SubtitlesManager.Instance.PlayDialogue("D_WinEnd");
 
         StartCoroutine(ReturnToMainMenu());
     }
@@ -286,6 +288,7 @@ public class GameManager : MonoBehaviour
         playerInfo.GetComponent<Animator>().SetBool("IS_LoseTurn", true);
 
         spawnedEnemy.GetComponent<Animator>().SetTrigger("Punch");
+        SoundManager.Instance.PlaySound("Punch");
         
         yield return new WaitForSeconds(loseTurnDuration);
         
@@ -310,11 +313,11 @@ public class GameManager : MonoBehaviour
     {
         if (currentState == GameState.InBed)
         {
-            if (eventObjectManager.EventObjectsList.Count-1 <= eventObjectManager.FixedCount)
+            if (eventObjectManager.EventObjectsList.Count <= eventObjectManager.FixedCount)
             {
                 return GameState.Win;
             }
-            else if (eventObjectManager.EventObjectsList.Count-1 - eventObjectManager.FixedCount <= unfixedEventObjectsCount)
+            else if (eventObjectManager.EventObjectsList.Count - eventObjectManager.FixedCount <= unfixedEventObjectsCount)
             {
                 return GameState.LastChanceTimer;
             }
@@ -325,7 +328,7 @@ public class GameManager : MonoBehaviour
         }
         else if (currentState == GameState.LastChanceTimer)
         {
-            if (eventObjectManager.EventObjectsList.Count-1 <= eventObjectManager.FixedCount)
+            if (eventObjectManager.EventObjectsList.Count <= eventObjectManager.FixedCount)
             {
                 return GameState.Win;
             }

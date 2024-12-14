@@ -20,6 +20,20 @@ public class CutsceneManager : SingletonManager<CutsceneManager>
         videoPlayer.Play();
     }
 
+    private void Update()
+    {
+        if (InputManager.Instance.IsSkip())
+        {
+            SkipCutscene();
+        }
+    }
+
+    private void SkipCutscene()
+    {
+        //videoPlayer.Stop();
+        LoadNextSceneAsync();
+    }
+
     private void OnVideoFinished(VideoPlayer vp)
     {
         Debug.Log("CutScene Completed.NewScene load...");
