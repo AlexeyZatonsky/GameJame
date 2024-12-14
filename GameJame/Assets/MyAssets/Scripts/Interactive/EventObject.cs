@@ -56,6 +56,7 @@ public class EventObject : InteractiveObject
             {
                 SoundManager.Instance.PlaySound(eventData.GetInteractObjectSound);
                 ChangeStateFix();
+                EventObjectManager.Instance.FixedCountPlus();
                 return;
             }
             

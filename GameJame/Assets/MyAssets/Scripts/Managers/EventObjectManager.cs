@@ -12,6 +12,7 @@ public class EventObjectManager : SingletonManager<EventObjectManager>
     {
         //FindEventObj
         eventObjectsList = new List<EventObject>(FindObjectsOfType<EventObject>());
+        /*
         foreach (var eventObject in eventObjectsList)
         {
             int randomValue = Random.Range(0, 100);
@@ -25,6 +26,7 @@ public class EventObjectManager : SingletonManager<EventObjectManager>
             }
             Debug.Log($"EventObject name: {eventObject.name}, needtofix");
         }
+        */
     }
 
     /*
@@ -47,6 +49,11 @@ public class EventObjectManager : SingletonManager<EventObjectManager>
         }
     }
     */
+
+    public void SetFixedCount(int count)
+    {
+        fixedCount = count;
+    }
 
     public List<EventObject> EventObjectsList => eventObjectsList;
     public int FixedCount => fixedCount;

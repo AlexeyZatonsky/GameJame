@@ -46,8 +46,14 @@ public class EnableEventManager : SingletonManager<EnableEventManager>
 
         EventObject[] local_events = GetComponentsInChildren<EventObject>();
         events.AddRange(eventsPull.GetComponentsInChildren<EventObject>());
+
+        if (events.Count() > 0)
+        {
+            events.ForEach(eventObject => eventObject.ChangeStateNeedFix());
+        }
         
-        
+        EventObjectManager.Instance.SetFixedCount(0);
+
         setRandomStateToEvents();
     }
 
@@ -84,6 +90,7 @@ public class EnableEventManager : SingletonManager<EnableEventManager>
             if(eventObject.GetEventData().GetEventObjState == EventObjState.Fixed)
                  return;
             
+            EventObjectManager.Instance.FixedCountPlus();
             eventObject.ChangeStateFix();
             events.Remove(eventObject);
             return;
